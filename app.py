@@ -1,10 +1,11 @@
 #from repository import save_to_database, read_database
 from flask import Flask, Response, jsonify, request, make_response
 import json
+from operator import itemgetter
 
 app = Flask(__name__)
 
-scores = [{"id": 1, "name": "jack", "rating":123}, {"id": 2, "name": "hannah", "rating": 4567}]
+scores = [{"id": 1, "name": "jack", "points":123}, {"id": 2, "name": "hannah", "points": 4567}]
 
 @app.after_request
 def after_request(response):
@@ -55,15 +56,25 @@ def delete_customer(the_id):
         return make_response("", 204)
     else:
         return make_response("", 404)
-    
-@app.route('/scores/sort=<string:order>')
-def sort(order):
-    print(f"Order: {order}")
-    reverse = False
-    if order == "desc":
-        reverse = True
-    sorted_scores = sorted(scores, key=lambda x: int(x["rating"]), reverse=reverse)
-    return jsonify(sorted_scores), 200
+
+# MATIAS sort scores in asc or desc order
+@app.route('/scores/sort', methods=['GET'])
+def sort():
+    # Extract the 'sort' query parameter from the URL (after "?")
+    order = request.args.get('sort')
+    # Sort the scores dictionary based on the 'points' field
+    if order == 'desc':
+        # If the order is desc then the reverse is True
+        sorted_scores = sorted(scores, key=itemgetter("points"), reverse=True)
+        # Return the sorted scores in JSON format along with a success status code
+        return jsonify(sorted_scores), 200
+    elif order == 'asc':
+        sorted_scores = sorted(scores, key=itemgetter("points"), reverse=False)
+        # Return the sorted scores in JSON format along with a success status code in ascending order
+        return jsonify(sorted_scores), 200
+    else:
+        # Return an empty response with a 404 status code if the 'sort' parameter is missing or invalid
+        return make_response("", 404)
 
 
 if __name__ == "__main__":

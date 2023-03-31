@@ -1,4 +1,4 @@
-get https://scores-shxw.onrender.com/scores
+get http://127.0.0.1:5000/scores
 
 ###
 
@@ -21,11 +21,11 @@ get http://scores-shxw.onrender.com/scores?limit=10
 
 ###
 
-get http://scores-shxw.onrender.com/scores?sort=asc
+get http://scores-shxw.onrender.com/scores/sort?sort=asc
 
 ###
 
-get http://scores-shxw.onrender.com/scores?sort=desc
+get http://scores-shxw.onrender.com/scores/sort?sort=desc
 
 ###
 
