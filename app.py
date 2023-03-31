@@ -44,7 +44,7 @@ def add_customer():
     return make_response("", 201)
 
 # JONNA "Deleting a score by id":
-@app.route('/customers/<int:the_id>', methods=['DELETE'])
+@app.route('/scores/<int:the_id>', methods=['DELETE'])
 def delete_customer(the_id):
     index_to_be_deleted = -1
 
@@ -57,6 +57,8 @@ def delete_customer(the_id):
         return make_response("", 204)
     else:
         return make_response("", 404)
+    
+    
 
 
 
