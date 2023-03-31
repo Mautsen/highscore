@@ -10,7 +10,7 @@ delete https://scores-shxw.onrender.com/scores/6
 
 ###
 
-post https://scores-shxw.onrender.com/scores/
+post https://scores-shxw.onrender.com/scores
 content-type: application/json
 
 { "name": "Sofia" }
