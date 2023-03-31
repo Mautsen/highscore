@@ -2,7 +2,7 @@ get https://scores-shxw.onrender.com/scores
 
 ###
 
-get https://scores-shxw.onrender.com/scores/1
+get https://scores-shxw.onrender.com/scores/2
 
 ###
 
@@ -10,7 +10,7 @@ delete https://scores-shxw.onrender.com/scores/6
 
 ###
 
-post https://scores-shxw.onrender.com/scores/1
+post https://scores-shxw.onrender.com/scores/
 content-type: application/json
 
 { "name": "Sofia" }
