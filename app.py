@@ -27,19 +27,17 @@ def get_scores_id(the_id):
 
 # JONNA "Adding a new score"
 @app.route('/scores', methods=['POST'])
-def add_customer():
+def add_score():
     # load given string and turn it into dictionary
-    customer = json.loads(request.data)
-    # check if customer ID already exists
-    for existing_customer in scores:
-        if existing_customer['id'] == customer['id']:
-            return make_response("", 409)
-    # generate new customer ID
-    last_customer_id = scores[-1]['id'] if scores else 0
-    customer_id = last_customer_id + 1
-    # add new customer with generated ID
-    customer['id'] = customer_id
-    scores.append(customer)
+    score = json.loads(request.data)
+    # generate new score ID
+    if scores:
+        score_id = scores[-1]['id'] + 1
+    else:
+        score_id = 1
+    # add new score with generated ID
+    score['id'] = score_id
+    scores.append(score)
     # return success response
     return make_response("", 201)
 
