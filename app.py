@@ -55,6 +55,15 @@ def delete_customer(the_id):
         return make_response("", 204)
     else:
         return make_response("", 404)
+    
+@app.route('/scores/sort=<string:order>')
+def sort(order):
+    print(f"Order: {order}")
+    reverse = False
+    if order == "desc":
+        reverse = True
+    sorted_scores = sorted(scores, key=lambda x: int(x["rating"]), reverse=reverse)
+    return jsonify(sorted_scores), 200
 
 
 if __name__ == "__main__":

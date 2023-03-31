@@ -15,3 +15,19 @@ content-type: application/json
 
 { "name": "Sofia", "rating": 5678 }
 
+###
+
+get http://scores-shxw.onrender.com/scores?limit=10
+
+###
+
+get http://scores-shxw.onrender.com/scores?sort=asc
+
+###
+
+get http://scores-shxw.onrender.com/scores?sort=desc
+
+###
+
+get http://scores-shxw.onrender.com/scores?sort=desc&limit=10&pw=secret
+
