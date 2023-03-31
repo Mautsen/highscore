@@ -4,7 +4,7 @@ import json
 
 app = Flask(__name__)
 
-scores = [{"id": 1, "name": "jack"}, {"id": 2, "name": "hannah"}]
+scores = [{"id": 1, "name": "jack", "rating":123}, {"id": 2, "name": "hannah", "rating": 4567}]
 
 @app.after_request
 def after_request(response):
@@ -55,29 +55,7 @@ def delete_customer(the_id):
         return make_response("", 204)
     else:
         return make_response("", 404)
-    
-    
 
-
-
-
-# @app.route('/scores', methods=['POST'])
-# def add_customer():
-#     global the_id # Global variable to keep track of the ID of the new customer
-#     global scores
-#  # Global list to store the existing scores
-
-    
-#     customer = json.loads(request.data) # Get the customer data from the request and convert it to a Python dictionary using the json module
-    
-#     the_id += 1 # Increment the ID to generate a new ID for the new customer
-#     customer['id'] = the_id # Assign the new ID to the customer
-#     scores.append(customer) # Add the new customer to the list of scores
-
-#     save_to_database(customer) # Save the new customer to the database
-    
-#     return make_response("", 201) # Return a HTTP 201 Created status code to indicate that the customer was successfully added
-#     #401 CONFLICT
 
 if __name__ == "__main__":
     app.run()
