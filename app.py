@@ -8,7 +8,7 @@ scores = [{"id": 1, "name": "jack"}, {"id": 2, "name": "hannah"}]
 
 @app.after_request
 def after_request(response):
-    response.headers['Access-Control-Allow-Methods'] = 'DELETE'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, DELETE'
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
