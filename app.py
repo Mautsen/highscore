@@ -13,6 +13,10 @@ def after_request(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
+def save_scores_to_file():
+    with open("scores.txt", "w") as file:
+        json.dump(scores, file)
+
 # JONNA "Fetching all scores":
 @app.route("/scores")
 def get_scores():
@@ -39,6 +43,8 @@ def add_score():
     # add new score with generated ID
     score['id'] = score_id
     scores.append(score)
+    # save ro file
+    save_scores_to_file()
     # return success response
     return make_response("", 201)
 
@@ -53,6 +59,8 @@ def delete_customer(the_id):
     
     if(index_to_be_deleted != -1):
         scores.pop(index_to_be_deleted)
+        # save to file
+        save_scores_to_file()
         return make_response("", 204)
     else:
         return make_response("", 404)

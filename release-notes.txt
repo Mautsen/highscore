@@ -1,0 +1,7 @@
+RELEASE 1
+- Fetching all scores
+- Fetching score based on id
+- Adding a new score
+- Deleting a score by id
+- Sort scores in asc or desc order
+
