@@ -17,7 +17,7 @@ content-type: application/json
 
 ###
 
-get http://scores-shxw.onrender.com/scores?limit=10
+get http://scores-shxw.onrender.com/scores?limit=2
 
 ###
 
