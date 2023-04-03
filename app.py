@@ -5,7 +5,7 @@ from operator import itemgetter
 
 app = Flask(__name__)
 
-scores = [{"id": 1, "name": "jack", "points":123}, {"id": 2, "name": "hannah", "points": 4567}]
+#scores = [{"id": 1, "name": "jack", "points":123}, {"id": 2, "name": "hannah", "points": 4567}]
 
 @app.after_request
 def after_request(response):
@@ -45,6 +45,7 @@ def get_scores():
 # JONNA "Fetching score based on id": 
 @app.route('/scores/<int:the_id>')
 def get_scores_id(the_id):
+    scores = read_scores()
     for score in scores:
         if score["id"] == the_id:
             return jsonify(score), 200
@@ -55,6 +56,7 @@ def get_scores_id(the_id):
 def add_score():
     # load given string and turn it into dictionary
     score = json.loads(request.data)
+    scores = read_scores()
     # generate new score ID
     if scores:
         score_id = scores[-1]['id'] + 1
@@ -71,6 +73,7 @@ def add_score():
 # JONNA "Deleting a score by id":
 @app.route('/scores/<int:the_id>', methods=['DELETE'])
 def delete_customer(the_id):
+    scores = read_scores()
     index_to_be_deleted = -1
 
     for i in range(0, len(scores)):
@@ -88,6 +91,9 @@ def delete_customer(the_id):
 # MATIAS sort scores in asc or desc order
 @app.route('/scores/sort', methods=['GET'])
 def sort():
+    # JONNA TEKI ALLA OLEVAN LISÄYKSEN, KUN POISTI GLOBAALIN LISTAN, ETTÄ SAATAIS TALLENNUS TOIMIMAAN, MUOKKAA
+    # TAI POISTA JOS EI TOIMI NÄIN HYVIN TÄSSÄ!!!!!!!!! (OLEN PAHOILLANI:()
+    scores = read_scores() 
     # Extract the 'sort' query parameter from the URL (after "?")
     order = request.args.get('sort')
     # Sort the scores dictionary based on the 'points' field
