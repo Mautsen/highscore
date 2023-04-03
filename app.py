@@ -45,9 +45,11 @@ def save_scores(scores):
 # JONNA "Fetching all scores":
 @app.route("/scores")
 def get_scores():
-    #If there is "sort" after /scores then the sort() function gets executed
+    #If there is "sort" after /scores then the sort() function gets executed -Matias
     if request.path == '/scores' and 'sort' in request.args:
         return sort()
+    elif request.path == '/scores' and 'limit' in request.args:
+        return limit()
     # luetaan tiedot tiedostosta
     else: 
         scores = read_scores()
@@ -121,6 +123,35 @@ def sort():
     else:
         # Return an empty response with a 404 status code if the 'sort' parameter is missing or invalid
         return make_response("", 404)
+    
+#MATIAS limit how many scores are shown
+@app.route('/scores', methods=['GET'])
+def limit():
+    scores = read_scores()
+    # finds the limit from url
+    limit = request.args.get('limit')
+
+    limit = int(limit)
+
+    #If there is no limit found, return error
+    if limit is None:
+        return "Limit parameter missing", 400
+    #The limit must be in integer
+    try:
+        limit = int(limit)
+    except ValueError:
+        return "Limit parameter is not a valid integer", 400
+
+    #Initialize an empty list to hold the scores within the limit
+    results = []
+    for i in range(0, limit):
+        # If i is greater than or equal to the length of scores, break the loop
+        if i >= len(scores):
+            break
+        else: # Otherwise, append the ith score to the results list
+            results.append(scores[i])
+
+    return jsonify(results), 200
 
 
 if __name__ == "__main__":
