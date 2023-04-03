@@ -35,6 +35,7 @@ def save_scores(scores):
 # def get_scores():
 #     return jsonify(scores)
 
+@app.route("/scores")
 def get_scores():
     # luetaan tiedot tiedostosta
     scores = read_scores()
