@@ -13,7 +13,7 @@ delete http://scores-shxw.onrender.com/scores/2
 post http://scores-shxw.onrender.com/scores
 content-type: application/json
 
-{ "name": "Pimu", "points": 33 }
+{ "name": "Sofia", "points": 13 }
 
 ###
 
