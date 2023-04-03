@@ -45,10 +45,14 @@ def save_scores(scores):
 # JONNA "Fetching all scores":
 @app.route("/scores")
 def get_scores():
+    #If there is "sort" after /scores then the sort() function gets executed
+    if request.path == '/scores' and 'sort' in request.args:
+        return sort()
     # luetaan tiedot tiedostosta
-    scores = read_scores()
+    else: 
+        scores = read_scores()
     # palautetaan tiedot json-muodossa
-    return jsonify(scores)
+        return jsonify(scores)
 
 # JONNA "Fetching score based on id": 
 @app.route('/scores/<int:the_id>')
@@ -97,7 +101,7 @@ def delete_customer(the_id):
         return make_response("", 404)
 
 # MATIAS sort scores in asc or desc order
-@app.route('/scores/sort', methods=['GET'])
+@app.route('/scores', methods=['GET'])
 def sort():
     # JONNA TEKI ALLA OLEVAN LISÄYKSEN, KUN POISTI GLOBAALIN LISTAN, ETTÄ SAATAIS TALLENNUS TOIMIMAAN, MUOKKAA
     # TAI POISTA JOS EI TOIMI NÄIN HYVIN TÄSSÄ!!!!!!!!! (OLEN PAHOILLANI:()

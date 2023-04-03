@@ -1,4 +1,4 @@
-get http://127.0.0.1:5000/scores
+get http://scores-shxw.onrender.com/scores
 
 ###
 
@@ -10,7 +10,7 @@ delete https://scores-shxw.onrender.com/scores/2
 
 ###
 
-post http://127.0.0.1:5000/scores
+post http://scores-shxw.onrender.com/scores
 content-type: application/json
 
 { "name": "Pimu", "points": 33 }
@@ -21,11 +21,11 @@ get http://scores-shxw.onrender.com/scores?limit=10
 
 ###
 
-get http://127.0.0.1:5000/scores/sort?sort=desc
+get http://scores-shxw.onrender.com/scores?sort=asc
 
 ###
 
-get http://scores-shxw.onrender.com/scores/sort?sort=desc
+get http://scores-shxw.onrender.com/scores?sort=desc
 
 ###
 
