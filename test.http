@@ -1,4 +1,4 @@
-get http://127.0.0.1:5000/scores
+get https://scores-shxw.onrender.com/scores
 
 ###
 

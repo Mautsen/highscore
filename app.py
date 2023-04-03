@@ -13,13 +13,32 @@ def after_request(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
-def save_scores_to_file():
-    with open("scores.txt", "w") as file:
-        json.dump(scores, file)
+# JONNA read_scores
+def read_scores():
+    # avataan json-tiedosto ja puretaan sen sisältö listaksi
+    try:
+        with open('scores.txt', 'r') as f:
+            scores = json.load(f)
+    # jos tiedostoa ei löydy, palautetaan tyhjä lista
+    except FileNotFoundError:
+        scores = []
+    return scores
+
+# JONNA save_scores to the scores.txt
+def save_scores(scores):
+    # tallennetaan tiedot json-muodossa tiedostoon
+    with open('scores.txt', 'w') as f:
+        json.dump(scores, f)
 
 # JONNA "Fetching all scores":
-@app.route("/scores")
+# @app.route("/scores")
+# def get_scores():
+#     return jsonify(scores)
+
 def get_scores():
+    # luetaan tiedot tiedostosta
+    scores = read_scores()
+    # palautetaan tiedot json-muodossa
     return jsonify(scores)
 
 # JONNA "Fetching score based on id": 
@@ -43,8 +62,8 @@ def add_score():
     # add new score with generated ID
     score['id'] = score_id
     scores.append(score)
-    # save ro file
-    save_scores_to_file()
+    # save updated scores
+    save_scores(scores)
     # return success response
     return make_response("", 201)
 
@@ -59,8 +78,8 @@ def delete_customer(the_id):
     
     if(index_to_be_deleted != -1):
         scores.pop(index_to_be_deleted)
-        # save to file
-        save_scores_to_file()
+        # tallennetaan
+        save_scores(scores)
         return make_response("", 204)
     else:
         return make_response("", 404)
