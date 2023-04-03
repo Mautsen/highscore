@@ -1,19 +1,19 @@
-get https://scores-shxw.onrender.com/scores
+get http://127.0.0.1:5000/scores
 
 ###
 
-get https://scores-shxw.onrender.com/scores/2
+get http://127.0.0.1:5000/scores/2
 
 ###
 
-delete https://scores-shxw.onrender.com/scores/2
+delete http://127.0.0.1:5000/scores/2
 
 ###
 
-post https://scores-shxw.onrender.com/scores
+post http://127.0.0.1:5000/scores
 content-type: application/json
 
-{ "name": "Sofia", "rating": 5678 }
+{ "name": "Matias", "rating": 666 }
 
 ###
 

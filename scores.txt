@@ -1,1 +1,1 @@
-[{"id": 1, "name": "Jonna", "points": 30}]
+[{"id": 1, "name": "Jonna", "points": 30}, {"name": "Sofia", "rating": 5678, "id": 2}, {"name": "Matias", "rating": 666, "id": 3}]

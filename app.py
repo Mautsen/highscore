@@ -41,6 +41,8 @@ def save_scores(scores):
 # def get_scores():
 #     return jsonify(scores)
 
+
+# JONNA "Fetching all scores":
 @app.route("/scores")
 def get_scores():
     # luetaan tiedot tiedostosta
