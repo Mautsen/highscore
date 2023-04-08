@@ -5,3 +5,8 @@ RELEASE 1
 - Deleting a score by id
 - Sort scores in asc or desc order
 
+RELEASE 2
+- Reading scores
+- Save scores to the text file
+- 
+

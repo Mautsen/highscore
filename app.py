@@ -2,6 +2,7 @@
 from flask import Flask, Response, jsonify, request, make_response
 import json
 from operator import itemgetter
+import read_scores, save_scores
 
 app = Flask(__name__)
 
@@ -13,28 +14,6 @@ def after_request(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
-# JONNA read_scores
-def read_scores():
-    try:
-        with open('scores.txt', 'r') as f:
-            file_contents = f.read()
-            if file_contents.strip() == '':
-                # tiedosto on tyhjä, palautetaan tyhjä lista
-                return []
-            else:
-                scores = json.loads(file_contents)
-                if isinstance(scores, dict):
-                    # jos json-tiedosto sisältää yhden nimen, muutetaan se listaksi
-                    scores = [scores]
-    except FileNotFoundError:
-        scores = []
-    return scores
-
-# JONNA save_scores to the scores.txt
-def save_scores(scores):
-    # tallennetaan tiedot json-muodossa tiedostoon
-    with open('scores.txt', 'w') as f:
-        json.dump(scores, f)
 
 # JONNA "Fetching all scores":
 # @app.route("/scores")
