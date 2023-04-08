@@ -156,7 +156,12 @@ def index():
             #raise Exception("Give a proper name for example 'John Wick'")
     else:
         scores = read_scores()
-        return render_template('scores.html', name="", points="", scores=scores)
+        for score in scores:
+            score['id'] = score.pop('id')
+            score['name'] = score.pop('name')
+            score['points'] = score.pop('points')
+        return render_template('scores.html', scores=scores)
+        
         
 
 
