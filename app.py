@@ -1,8 +1,9 @@
 #from repository import save_to_database, read_database
-from flask import Flask, Response, jsonify, request, make_response
+from flask import Flask, Response, jsonify, request, make_response, render_template
 import json
 from operator import itemgetter
 from repository import read_scores, save_scores
+
 
 app = Flask(__name__)
 
@@ -131,6 +132,31 @@ def limit():
             results.append(scores[i])
 
     return jsonify(results), 200
+
+@app.route('/scores', methods = ['POST', 'GET'])
+def index():
+    """
+    The index function that handles both GET and POST requests to the root route. When a GET request is made,
+    the function reads the data from the database and renders the index.html template with an empty form.
+    When a POST request is made, the function reads the form data, validates the name and saves the data to the database.
+    It then reads the updated data from the database and renders the index.html template with the updated data.
+
+    Returns:
+        str: the rendered HTML template as a string.
+    """ 
+    if request.method == 'POST':
+        id = request.form.get('id') # get user input from post
+        name = request.form.get('name')
+        points=request.form.get('points')
+        name = f"{name}" 
+        save_to_database(id, name, points)
+        read_database()   
+        return render_template('scores.html', name=str(name), id=id, points=points)
+        #else:
+            #raise Exception("Give a proper name for example 'John Wick'")
+    else:
+        scores = read_database()
+        return render_template('scores.html', name="", id="", points="")
 
 
 if __name__ == "__main__":
