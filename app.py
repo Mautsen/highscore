@@ -85,8 +85,6 @@ def delete_customer(the_id):
 # MATIAS sort scores in asc or desc order
 @app.route('/scores', methods=['GET'])
 def sort():
-    # JONNA TEKI ALLA OLEVAN LISÄYKSEN, KUN POISTI GLOBAALIN LISTAN, ETTÄ SAATAIS TALLENNUS TOIMIMAAN, MUOKKAA
-    # TAI POISTA JOS EI TOIMI NÄIN HYVIN TÄSSÄ!!!!!!!!! (OLEN PAHOILLANI:()
     scores = read_scores() 
     # Extract the 'sort' query parameter from the URL (after "?")
     order = request.args.get('sort')
@@ -133,37 +131,34 @@ def limit():
 
     return jsonify(results), 200
 
-@app.route('/', methods = ['POST', 'GET'])
-def index():
-    """
-    The index function that handles both GET and POST requests to the root route. When a GET request is made,
-    the function reads the data from the database and renders the index.html template with an empty form.
-    When a POST request is made, the function reads the form data, validates the name and saves the data to the database.
-    It then reads the updated data from the database and renders the index.html template with the updated data.
+# @app.route('/', methods = ['POST', 'GET'])
+# def index():
+#     """
+#     The index function that handles both GET and POST requests to the root route. When a GET request is made,
+#     the function reads the data from the database and renders the index.html template with an empty form.
+#     When a POST request is made, the function reads the form data, validates the name and saves the data to the database.
+#     It then reads the updated data from the database and renders the index.html template with the updated data.
 
-    Returns:
-        str: the rendered HTML template as a string.
-    """ 
-    if request.method == 'POST':
-        id = request.form.get('id') # get user input from post
-        name = request.form.get('name')
-        points=request.form.get('points')
-        name = f"{name}" 
-        save_scores(id, name, points)
-        read_scores()   
-        return render_template('scores.html', name=str(name), id=id, points=points)
-        #else:
-            #raise Exception("Give a proper name for example 'John Wick'")
-    else:
-        scores = read_scores()
-        for score in scores:
-            score['id'] = score.pop('id')
-            score['name'] = score.pop('name')
-            score['points'] = score.pop('points')
-        return render_template('scores.html', scores=scores)
-        
-        
-
+#     Returns:
+#         str: the rendered HTML template as a string.
+#     """ 
+#     if request.method == 'POST':
+#         id = request.form.get('id') # get user input from post
+#         name = request.form.get('name')
+#         points=request.form.get('points')
+#         name = f"{name}" 
+#         save_scores(id, name, points)
+#         read_scores()   
+#         return render_template('scores.html', name=str(name), id=id, points=points)
+#         #else:
+#             #raise Exception("Give a proper name for example 'John Wick'")
+#     else:
+#         scores = read_scores()
+#         for score in scores:
+#             score['id'] = score.pop('id')
+#             score['name'] = score.pop('name')
+#             score['points'] = score.pop('points')
+#         return render_template('scores.html', scores=scores)
 
 if __name__ == "__main__":
     app.run()

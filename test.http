@@ -1,4 +1,4 @@
-get http://scores-shxw.onrender.com/scores
+get https://scores-shxw.onrender.com/scores
 
 ###
 
@@ -6,14 +6,14 @@ get https://scores-shxw.onrender.com/scores/1
 
 ###
 
-delete http://scores-shxw.onrender.com/scores/5
+delete https://scores-shxw.onrender.com/scores/4
 
 ###
 
-post http://scores-shxw.onrender.com/scores
+post https://scores-shxw.onrender.com/scores
 content-type: application/json
 
-{ "name": "Sofia", "points": 13 }
+{ "name": "Jonna", "points": 4 }
 
 ###
 
