@@ -11,14 +11,14 @@ while True:
     url = 'http://scores-shxw.onrender.com/scores'
 
     if choise == 1:
-        customer_id = int(input("Enter the customer ID: "))
         customer_name = input("Enter the customer name: ")
-        myobj = {'id': customer_id, 'name': customer_name}
+        customer_points = int(input("Enter the customers points: "))
+        myobj = {'name': customer_name, 'points': customer_points}
         x = requests.post(url, json = myobj)
         if x.status_code == 201:
             print("Customer added succesfully")
         else:
-            print("Your ID is already in use, please choose another.")
+            print("Your name is already in use, please choose another.")
         #print(x.status_code)
     elif choise == 2:
         the_id=input("Give the customer id you want to delete:\n")
