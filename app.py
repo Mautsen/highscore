@@ -156,8 +156,10 @@ def index():
             #raise Exception("Give a proper name for example 'John Wick'")
     else:
         scores=read_scores()
-        data = [{'id': k, 'name': v['name'], 'points': v['points']} for k, v in scores.items()]
-        return render_template('scores.html', data=data)
+        id = [row['id'] for row in scores]
+        name = [row['name'] for row in scores]
+        points = [row['points'] for row in scores]
+        return render_template('scores.html', id=id, name=name, points=points)
 
 
 if __name__ == "__main__":
