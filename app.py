@@ -2,7 +2,7 @@
 from flask import Flask, Response, jsonify, request, make_response
 import json
 from operator import itemgetter
-import read_scores, save_scores
+from repository import read_scores, save_scores
 
 app = Flask(__name__)
 

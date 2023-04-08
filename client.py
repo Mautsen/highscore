@@ -1,5 +1,5 @@
 import requests
-from validation import validate_username
+# from validation import validate_username
 
 while True:
     print("1) Add customer")
