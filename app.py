@@ -155,8 +155,8 @@ def index():
         #else:
             #raise Exception("Give a proper name for example 'John Wick'")
     else:
-        read_scores()
-        return render_template('scores.html', name=str(name), id=id, points=points)
+        scores=read_scores()
+        return render_template('scores.html', scores)
 
 
 if __name__ == "__main__":
