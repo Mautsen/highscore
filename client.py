@@ -1,4 +1,5 @@
 import requests
+from validation import validate_username
 
 while True:
     print("1) Add customer")
@@ -11,9 +12,12 @@ while True:
     url = 'http://scores-shxw.onrender.com/scores'
 
     if choise == 1:
-        customer_name = input("Enter the customer name: ")
+        username = input("Enter the username: ")
+        # if not validate_username(username):
+        #     print("Username should be 3 alphanumeric characters without special characters")
+        #     continue
         customer_points = int(input("Enter the customers points: "))
-        myobj = {'name': customer_name, 'points': customer_points}
+        myobj = {'name': username, 'points': customer_points}
         x = requests.post(url, json = myobj)
         if x.status_code == 201:
             print("Customer added succesfully")
