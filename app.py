@@ -149,13 +149,13 @@ def index():
         name = request.form.get('name')
         points=request.form.get('points')
         name = f"{name}" 
-        save_to_database(id, name, points)
-        read_database()   
+        save_scores(id, name, points)
+        read_scores()   
         return render_template('scores.html', name=str(name), id=id, points=points)
         #else:
             #raise Exception("Give a proper name for example 'John Wick'")
     else:
-        scores = read_database()
+        scores = read_scores()
         return render_template('scores.html', name="", id="", points="")
 
 
