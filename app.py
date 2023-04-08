@@ -133,7 +133,7 @@ def limit():
 
     return jsonify(results), 200
 
-@app.route('/scores', methods = ['POST', 'GET'])
+@app.route('/', methods = ['POST', 'GET'])
 def index():
     """
     The index function that handles both GET and POST requests to the root route. When a GET request is made,
