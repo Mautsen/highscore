@@ -1,17 +1,17 @@
 import json
 
 def read_scores():
-    data = open("database.txt", "r")
+    data = open("scores.txt", "r")
     return data.read()
 
 def save_to_scores(name, id):
-    f = open("database.txt", "a")
+    f = open("scores.txt", "a")
     f.write(f"\n{id},{name}")
     f.close()
 
 #used with delete
 def overwrite_scores(db_list):
-    f = open("database.txt", "w")
+    f = open("scores.txt", "w")
     for i in range(len(db_list)):
         id = db_list[i]['id']
         name = db_list[i]['name']

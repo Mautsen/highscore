@@ -1,4 +1,3 @@
-#from repository import save_to_database, read_database
 from flask import Flask, Response, jsonify, request, make_response, render_template
 import json
 from operator import itemgetter
