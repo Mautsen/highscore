@@ -4,9 +4,9 @@ def read_scores():
     data = open("scores.txt", "r")
     return data.read()
 
-def save_to_scores(name, id):
+def save_to_scores(name, id, points):
     f = open("scores.txt", "a")
-    f.write(f"\n{id},{name}")
+    f.write(f"\n{id},{name},{points}")
     f.close()
 
 #used with delete
@@ -15,12 +15,13 @@ def overwrite_scores(db_list):
     for i in range(len(db_list)):
         id = db_list[i]['id']
         name = db_list[i]['name']
+        points = db_list[i]['points']
         if len(db_list) - 1 > i:
-            f.writelines(str(id) + ',' + name + '\n')
+            f.writelines(str(id) + ',' + name + ',' + str(points) + '\n')
         else:
             #last line of database.txt must not be empty,
             #pr it will break the code
-            f.writelines(str(id) + ',' + name)
+            f.writelines(str(id) + ',' + name + str(points))
     f.close()
 
 def fetch_scores():
@@ -29,7 +30,7 @@ def fetch_scores():
     db_split = database_content.split('\n')
     for data in db_split:
         attributes = data.split(',')
-        customer = {'id': int(attributes[0]), 'name': attributes[1]}
+        customer = {'id': int(attributes[0]), 'name': attributes[1], 'points': attributes[2]}
         customers.append(customer)
     return customers
 
