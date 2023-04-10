@@ -2,7 +2,7 @@ from flask import Flask, Response, jsonify, request, make_response, render_templ
 import json
 from operator import itemgetter
 from repository import *
-import requests
+
 
 
 app = Flask(__name__)
