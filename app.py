@@ -38,8 +38,8 @@ def get_scores():
 # JONNA "Fetching score based on id": 
 @app.route('/scores/<int:the_id>')
 def get_scores_id(the_id):
-    # scores = read_scores()
-    scores = fetch_scores()
+    scores = read_scores()
+    # scores = fetch_scores()
     for score in scores:
         if score["id"] == the_id:
             return jsonify(score), 200
@@ -50,8 +50,8 @@ def get_scores_id(the_id):
 def add_score():
     # load given string and turn it into dictionary
     score = json.loads(request.data)
-    # scores = read_scores()
-    scores = fetch_scores()
+    scores = read_scores()
+    # scores = fetch_scores()
     # generate new score ID
     if scores:
         score_id = scores[-1]['id'] + 1
@@ -154,8 +154,8 @@ def index():
         #else:
             #raise Exception("Give a proper name for example 'John Wick'")
     else:
-        # scores = read_scores()
-        scores = fetch_scores()
+        scores = read_scores()
+        # scores = fetch_scores()
         for score in scores:
             score['id'] = score.pop('id')
             score['name'] = score.pop('name')
