@@ -2,6 +2,7 @@ from flask import Flask, Response, jsonify, request, make_response, render_templ
 import json
 from operator import itemgetter
 from repository import *
+import requests
 
 
 app = Flask(__name__)
@@ -14,19 +15,27 @@ def after_request(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
-# JONNA "Fetching all scores":
+# JONNA & MATIAS "Fetching all scores":
 @app.route("/scores")
 def get_scores():
-    #If there is "sort" after /scores then the sort() function gets executed -Matias
-    if request.path == '/scores' and 'sort' in request.args:
-        return sort()
-    elif request.path == '/scores' and 'limit' in request.args:
-        return limit()
-    # luetaan tiedot tiedostosta
-    else: 
-        scores = read_scores()
-    # palautetaan tiedot json-muodossa
-        return jsonify(scores)
+    scores=read_scores()
+    # Copy the scores list to avoid modifying the original list.
+    sorted_scores = scores
+    # Get the 'sort' query parameter from the request, which specifies how to sort the scores.
+    sort = request.args.get("sort")
+    # If the 'sort' parameter is set to 'asc', sort the scores list in ascending order.
+    if sort == "asc":
+        sorted_scores = sorted(sorted_scores, key=lambda s: s["points"])
+    # If the 'sort' parameter is set to 'desc', sort the scores list in descending order.
+    elif sort == "desc":
+        sorted_scores = sorted(sorted_scores, key=lambda s: s["points"], reverse=True)
+    # Get the 'limit' query parameter from the request, which specifies the maximum number of scores to return.
+    limit = request.args.get("limit")
+    # If the 'limit' parameter is set, slice the sorted scores list to return only the first 'limit' scores.
+    if limit:
+        sorted_scores = sorted_scores[:int(limit)]
+    # Return the sorted and limited scores list as a JSON response.
+    return jsonify(sorted_scores)
 
 # JONNA "Fetching score based on id": 
 @app.route('/scores/<int:the_id>')

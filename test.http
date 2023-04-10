@@ -25,9 +25,9 @@ get http://scores-shxw.onrender.com/scores?sort=asc
 
 ###
 
-get http://scores-shxw.onrender.com/scores?sort=desc
+get http://127.0.0.1:5000/scores?sort=desc
 
 ###
 
-get http://scores-shxw.onrender.com/scores?sort=desc&limit=10&pw=secret
+get http://127.0.0.1:5000/scores?sort=asc&limit=2
 
