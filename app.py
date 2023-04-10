@@ -149,13 +149,14 @@ def index():
         name = request.form.get('name')
         points=request.form.get('points')
         name = f"{name}" 
-        save_scores(id, name, points)
+        save_to_scores(id, name, points)
         read_scores()   
         return render_template('scores.html', name=str(name), id=id, points=points)
         #else:
             #raise Exception("Give a proper name for example 'John Wick'")
     else:
-        scores = read_scores()
+        # scores = read_scores()
+        scores = fetch_scores()
         for score in scores:
             score['id'] = score.pop('id')
             score['name'] = score.pop('name')
