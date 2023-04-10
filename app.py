@@ -14,13 +14,6 @@ def after_request(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
-
-# JONNA "Fetching all scores":
-# @app.route("/scores")
-# def get_scores():
-#     return jsonify(scores)
-
-
 # JONNA "Fetching all scores":
 @app.route("/scores")
 def get_scores():
