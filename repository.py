@@ -54,21 +54,21 @@ def read_scores():
     return scores
 
 # JONNA save_scores to the scores.txt
-def save_scores(scores):
+def save_to_scores(scores):
     # tallennetaan tiedot json-muodossa tiedostoon
     with open('scores.txt', 'w') as f:
         json.dump(scores, f)
     # with open("database.txt", 'a') as f:
     #     f.write(f"\n{id},{name},{points}")
 
-def fetch_customers():
-    scores = []
-    with open('scores.txt', 'r') as f:
-        scores = json.load(f)
-    for data in scores:
-        customer = {'id': int(data['id']), 'name': data['name'], 'points': data['points']}
-        scores.append(customer)
-    return scores
+# def fetch_customers():
+#     scores = []
+#     with open('scores.txt', 'r') as f:
+#         scores = json.load(f)
+#     for data in scores:
+#         customer = {'id': int(data['id']), 'name': data['name'], 'points': data['points']}
+#         scores.append(customer)
+#     return scores
 
 def main():
     print(read_scores())
