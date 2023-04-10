@@ -54,10 +54,10 @@ def read_scores():
     return scores
 
 # JONNA save_scores to the scores.txt
-def save_to_scores(scores):
+def save_to_scores(id, name, points):
     # tallennetaan tiedot json-muodossa tiedostoon
     with open('scores.txt', 'w') as f:
-        json.dump(scores, f)
+        json.dump(id, name, points, f)
     # with open("database.txt", 'a') as f:
     #     f.write(f"\n{id},{name},{points}")
 
