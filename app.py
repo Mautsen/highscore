@@ -141,7 +141,7 @@ def index():
         name = request.form.get('name')
         points=request.form.get('points')
         name = f"{name}" 
-        save_to_scores(id, name, points)
+        save_to_scores(scores)
         read_scores()   
         return render_template('scores.html', name=str(name), id=id, points=points)
         #else:
