@@ -8,5 +8,7 @@ RELEASE 1
 RELEASE 2
 - Reading scores
 - Save scores to the text file
-- 
+- Limit scores
+- Limit & sort work together
+
 
