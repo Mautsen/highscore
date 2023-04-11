@@ -48,10 +48,31 @@ def get_scores_id(the_id):
     return make_response ("", 404)
 
 # JONNA "Adding a new score"
+# @app.route('/scores', methods=['POST'])
+# def add_score():
+#     # load given string and turn it into dictionary
+#     score = json.loads(request.data)
+#     # score = request.json
+#     scores = read_scores()
+#     # generate new score ID
+#     if scores:
+#         score_id = scores[-1]['id'] + 1
+#     else:
+#         score_id = 1
+#     # add new score with generated ID
+#     score['id'] = score_id
+#     scores.append(score)
+#     # save updated scores
+#     save_to_scores(scores)
+#     # return success response
+#     return make_response("", 201)
+
 @app.route('/scores', methods=['POST'])
 def add_score():
-    # load given string and turn it into dictionary
-    score = json.loads(request.data)
+    # load given JSON data and turn it into dictionary
+    score = request.get_json()
+    if not score:
+        return make_response("Invalid JSON data", 400)
     scores = read_scores()
     # generate new score ID
     if scores:
@@ -150,8 +171,8 @@ def index():
         points = request.form.get('points')
         score = {'name': name, 'points': points}
         resp = requests.post(url='https://scores-shxw.onrender.com/scores', json=score)
+        add_score()
         if resp.status_code == 201:
-            save_to_scores(score)  # korjattu
             scores = read_scores()
             return render_template('scores.html', scores=scores)
         else:
