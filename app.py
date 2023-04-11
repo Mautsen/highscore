@@ -41,7 +41,6 @@ def get_scores():
 @app.route('/scores/<int:the_id>')
 def get_scores_id(the_id):
     scores = read_scores()
-    # scores = fetch_scores()
     for score in scores:
         if score["id"] == the_id:
             return jsonify(score), 200
@@ -53,7 +52,6 @@ def add_score():
     # load given string and turn it into dictionary
     score = json.loads(request.data)
     scores = read_scores()
-    # scores = fetch_scores()
     # generate new score ID
     if scores:
         score_id = scores[-1]['id'] + 1
@@ -145,14 +143,25 @@ def index():
     Returns:
         str: the rendered HTML template as a string.
     """ 
+
     if request.method == 'POST':
-        id = request.form.get('id') # get user input from post
         name = request.form.get('name')
-        points=request.form.get('points')
-        name = f"{name}" 
-        save_to_scores(scores)
-        read_scores()   
-        return render_template('scores.html', name=str(name), id=id, points=points)
+        points = request.form.get('points')
+        score = {'name': name, 'points': points}
+        resp = request.post(url='https://scores-shxw.onrender.com/scores', json=score)
+        if resp.status_code == 201:
+            scores = read_scores()
+            return render_template('scores.html', scores=scores)
+        else:
+            return "Failed to save score", 500
+    # if request.method == 'POST':
+    #     id = request.form.get('id') # get user input from post
+    #     name = request.form.get('name')
+    #     points=request.form.get('points')
+    #     name = f"{name}" 
+    #     save_to_scores(scores)
+    #     read_scores()   
+    #     return render_template('scores.html', name=str(name), id=id, points=points)
         #else:
             #raise Exception("Give a proper name for example 'John Wick'")
     else:
