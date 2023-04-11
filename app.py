@@ -168,7 +168,7 @@ def index():
         name = request.form.get('name')
         points = request.form.get('points')
         score = {'name': name, 'points': points}
-        resp = requests.post(url='https://scores-shxw.onrender.com', json=score)
+        resp = requests.post(url='https://scores-shxw.onrender.com/scores', json=score)
         if resp.status_code == 201:
             add_score()
             scores = read_scores()
