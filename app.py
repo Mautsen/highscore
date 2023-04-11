@@ -4,8 +4,6 @@ from operator import itemgetter
 from repository import *
 import requests
 
-
-
 app = Flask(__name__)
 
 #scores = [{"id": 1, "name": "jack", "points":123}, {"id": 2, "name": "hannah", "points": 4567}]
@@ -171,8 +169,8 @@ def index():
         points = request.form.get('points')
         score = {'name': name, 'points': points}
         resp = requests.post(url='https://scores-shxw.onrender.com/scores', json=score)
-        add_score()
         if resp.status_code == 201:
+            add_score()
             scores = read_scores()
             return render_template('scores.html', scores=scores)
         else:
