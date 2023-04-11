@@ -151,11 +151,12 @@ def index():
         score = {'name': name, 'points': points}
         resp = requests.post(url='https://scores-shxw.onrender.com/scores', json=score)
         if resp.status_code == 201:
-            save_to_scores(scores)
+            save_to_scores(score)  # korjattu
             scores = read_scores()
             return render_template('scores.html', scores=scores)
         else:
             return "Failed to save score", 500
+
     # if request.method == 'POST':
     #     id = request.form.get('id') # get user input from post
     #     name = request.form.get('name')
@@ -168,7 +169,6 @@ def index():
             #raise Exception("Give a proper name for example 'John Wick'")
     else:
         scores = read_scores()
-        # scores = fetch_scores()
         for score in scores:
             score['id'] = score.pop('id')
             score['name'] = score.pop('name')
