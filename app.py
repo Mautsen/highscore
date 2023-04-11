@@ -147,9 +147,9 @@ def index():
 
     if request.method == 'POST':
         name = request.form.get('name')
-        points = requests.form.get('points')
+        points = request.form.get('points')
         score = {'name': name, 'points': points}
-        resp = request.post(url='https://scores-shxw.onrender.com/scores', json=score)
+        resp = requests.post(url='https://scores-shxw.onrender.com/scores', json=score)
         if resp.status_code == 201:
             scores = read_scores()
             return render_template('scores.html', scores=scores)
