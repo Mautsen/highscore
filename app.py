@@ -2,6 +2,7 @@ from flask import Flask, Response, jsonify, request, make_response, render_templ
 import json
 from operator import itemgetter
 from repository import *
+import requests
 
 
 
@@ -146,7 +147,7 @@ def index():
 
     if request.method == 'POST':
         name = request.form.get('name')
-        points = request.form.get('points')
+        points = requests.form.get('points')
         score = {'name': name, 'points': points}
         resp = request.post(url='https://scores-shxw.onrender.com/scores', json=score)
         if resp.status_code == 201:
