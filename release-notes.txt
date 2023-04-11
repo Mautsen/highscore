@@ -10,5 +10,5 @@ RELEASE 2
 - Save scores to the text file
 - Limit scores
 - Limit & sort work together
-
+- HTML added
 
