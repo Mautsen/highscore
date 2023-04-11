@@ -151,6 +151,7 @@ def index():
         score = {'name': name, 'points': points}
         resp = requests.post(url='https://scores-shxw.onrender.com/scores', json=score)
         if resp.status_code == 201:
+            save_to_scores(scores)
             scores = read_scores()
             return render_template('scores.html', scores=scores)
         else:
