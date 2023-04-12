@@ -169,12 +169,18 @@ def index():
         points = request.form.get('points')
         score = {'name': name, 'points': points}
         resp = requests.post(url='https://scores-shxw.onrender.com', json=score)
-        if resp.status_code == 201:
+        if resp.status_code == 500:
+            return "Failed"
+        else:
             add_score()
             scores = read_scores()
             return render_template('scores.html', scores=scores)
-        else:
-            return "Failed to save score", 500
+        # if resp.status_code == 201:
+        #     add_score()
+        #     scores = read_scores()
+        #     return render_template('scores.html', scores=scores)
+        # else:
+        #     return "Failed to save score", 500
 
     # if request.method == 'POST':
     #     id = request.form.get('id') # get user input from post
