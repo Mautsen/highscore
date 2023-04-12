@@ -3,6 +3,7 @@ import json
 from operator import itemgetter
 from repository import *
 import requests
+from validation import validate_username
 
 app = Flask(__name__)
 
@@ -45,26 +46,8 @@ def get_scores_id(the_id):
             return jsonify(score), 200
     return make_response ("", 404)
 
-# JONNA "Adding a new score"
-# @app.route('/scores', methods=['POST'])
-# def add_score():
-#     # load given string and turn it into dictionary
-#     score = json.loads(request.data)
-#     # score = request.json
-#     scores = read_scores()
-#     # generate new score ID
-#     if scores:
-#         score_id = scores[-1]['id'] + 1
-#     else:
-#         score_id = 1
-#     # add new score with generated ID
-#     score['id'] = score_id
-#     scores.append(score)
-#     # save updated scores
-#     save_to_scores(scores)
-#     # return success response
-#     return make_response("", 201)
 
+# JONNA "Adding a new score"
 @app.route('/scores', methods=['POST'])
 def add_score():
     # load given JSON data and turn it into dictionary
@@ -192,6 +175,11 @@ def index():
         name = request.form.get('name')
         points = request.form.get('points')
         score = {'name': name, 'points': points}
+        # ASk user to enter a valid name if the name is not valid 
+        if not validate_username(name):
+            return render_template('scores.html', error='Username may contain three letters or numbers without special characters.')
+        score = {'name': name, 'points': points}
+        # If the name is valid add score to the database
         if add_score_to_database(score):
             scores = read_scores()
             return render_template('scores.html', scores=scores)

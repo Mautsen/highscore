@@ -35,6 +35,9 @@
     </table>
 
     <h2>Give Input</h2>
+        {% if error %}
+            <p>{{ error }}</p>
+        {% endif %}
 
     <form action="/" method="post">
         <input type="text" name="name" placeholder="Name">
