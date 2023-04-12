@@ -152,6 +152,30 @@ def limit():
 
     return jsonify(results), 200
 
+# JONNA (Poistetaan toinen, jos ei tarvita)
+def add_score_to_database(score):
+    """
+    Add a new score to the database.
+
+    Args:
+        score (dict): The new score to add to the database.
+
+    Returns:
+        bool: True if the score was successfully added to the database, False otherwise.
+    """
+    scores = read_scores()
+    # generate new score ID
+    if scores:
+        score_id = scores[-1]['id'] + 1
+    else:
+        score_id = 1
+    # add new score with generated ID
+    score['id'] = score_id
+    scores.append(score)
+    # save updated scores
+    save_to_scores(scores)
+    return True
+
 @app.route('/', methods = ['POST', 'GET'])
 def index():
     """
@@ -164,23 +188,18 @@ def index():
         str: the rendered HTML template as a string.
     """ 
 
-    if request.method == 'POST':
-        name = request.form.get('name')
-        points = request.form.get('points')
-        score = {'name': name, 'points': points}
-        resp = requests.post(url='https://scores-shxw.onrender.com', json=score)
-        if resp.status_code == 500:
-            return "Failed"
-        else:
-            add_score()
-            scores = read_scores()
-            return render_template('scores.html', scores=scores)
-        # if resp.status_code == 201:
-        #     add_score()
-        #     scores = read_scores()
-        #     return render_template('scores.html', scores=scores)
-        # else:
-        #     return "Failed to save score", 500
+    # if request.method == 'POST':
+    #     name = request.form.get('name')
+    #     points = request.form.get('points')
+    #     score = {'name': name, 'points': points}
+    #     resp = requests.post(url='http://127.0.0.1:5000/scores', json=score)
+    #     if resp.status_code == 201:
+    #         add_score()
+    #         scores = read_scores()
+    #         return render_template('scores.html', scores=scores)
+    #     else:
+    #         return "Failed to save score", 500
+
 
     # if request.method == 'POST':
     #     id = request.form.get('id') # get user input from post
@@ -192,6 +211,24 @@ def index():
     #     return render_template('scores.html', name=str(name), id=id, points=points)
         #else:
             #raise Exception("Give a proper name for example 'John Wick'")
+    # else:
+    #     scores = read_scores()
+    #     for score in scores:
+    #         score['id'] = score.pop('id')
+    #         score['name'] = score.pop('name')
+    #         score['points'] = score.pop('points')
+    #     return render_template('scores.html', scores=scores)
+
+
+    if request.method == 'POST':
+        name = request.form.get('name')
+        points = request.form.get('points')
+        score = {'name': name, 'points': points}
+        if add_score_to_database(score):
+            scores = read_scores()
+            return render_template('scores.html', scores=scores)
+        else:
+            return "Failed to save score", 500
     else:
         scores = read_scores()
         for score in scores:
@@ -202,3 +239,4 @@ def index():
 
 if __name__ == "__main__":
     app.run()
+
