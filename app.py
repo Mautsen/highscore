@@ -188,38 +188,6 @@ def index():
         str: the rendered HTML template as a string.
     """ 
 
-    # if request.method == 'POST':
-    #     name = request.form.get('name')
-    #     points = request.form.get('points')
-    #     score = {'name': name, 'points': points}
-    #     resp = requests.post(url='http://127.0.0.1:5000/scores', json=score)
-    #     if resp.status_code == 201:
-    #         add_score()
-    #         scores = read_scores()
-    #         return render_template('scores.html', scores=scores)
-    #     else:
-    #         return "Failed to save score", 500
-
-
-    # if request.method == 'POST':
-    #     id = request.form.get('id') # get user input from post
-    #     name = request.form.get('name')
-    #     points=request.form.get('points')
-    #     name = f"{name}" 
-    #     save_to_scores(scores)
-    #     read_scores()   
-    #     return render_template('scores.html', name=str(name), id=id, points=points)
-        #else:
-            #raise Exception("Give a proper name for example 'John Wick'")
-    # else:
-    #     scores = read_scores()
-    #     for score in scores:
-    #         score['id'] = score.pop('id')
-    #         score['name'] = score.pop('name')
-    #         score['points'] = score.pop('points')
-    #     return render_template('scores.html', scores=scores)
-
-
     if request.method == 'POST':
         name = request.form.get('name')
         points = request.form.get('points')
