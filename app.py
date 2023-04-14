@@ -68,35 +68,35 @@ def get_scores_id(the_id):
 
 
 # # JONNA "Adding a new score" 
-# # @app.route('/scores', methods=['POST'])
-# def add_score():
-#     """
-#     Adds a new score to the list of scores and generates ID.
+@app.route('/scores', methods=['POST'])
+def add_score():
+    """
+    Adds a new score to the list of scores and generates ID.
 
-#     Args:
-#         None
+    Args:
+        None
 
-#     Returns:
-#         - A response with an HTTP status code of 201 (Created) if the score is added successfully.
-#         - A response with an HTTP status code of 400 (Bad Request) if the JSON data is invalid.
-#     """
-#     # load given JSON data and turn it into dictionary
-#     score = request.get_json()
-#     if not score:
-#         return make_response("Invalid JSON data", 400)
-#     scores = read_scores()
-#     # generate new score ID
-#     if scores:
-#         score_id = scores[-1]['id'] + 1
-#     else:
-#         score_id = 1
-#     # add new score with generated ID
-#     score['id'] = score_id
-#     scores.append(score)
-#     # save updated scores
-#     save_to_scores(scores)
-#     # return success response
-#     return make_response("", 201)
+    Returns:
+        - A response with an HTTP status code of 201 (Created) if the score is added successfully.
+        - A response with an HTTP status code of 400 (Bad Request) if the JSON data is invalid.
+    """
+    # load given JSON data and turn it into dictionary
+    score = request.get_json()
+    if not score:
+        return make_response("Invalid JSON data", 400)
+    scores = read_scores()
+    # generate new score ID
+    if scores:
+        score_id = scores[-1]['id'] + 1
+    else:
+        score_id = 1
+    # add new score with generated ID
+    score['id'] = score_id
+    scores.append(score)
+    # save updated scores
+    save_to_scores(scores)
+    # return success response
+    return make_response("", 201)
 
 # JONNA "Deleting a score by id":
 @app.route('/scores/<int:the_id>', methods=['DELETE'])
@@ -190,7 +190,7 @@ def limit():
     return jsonify(results), 200
 
 # JONNA add new score
-@app.route('/scores', methods=['POST'])
+# @app.route('/scores', methods=['POST'])
 def add_score_to_database(score):
     """
     Add a new score to the database.
