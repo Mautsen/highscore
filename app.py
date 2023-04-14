@@ -58,7 +58,7 @@ def get_scores_id(the_id):
 
 
 # JONNA "Adding a new score"
-
+@app.route('/scores', methods=['POST'])
 def add_score():
     # load given JSON data and turn it into dictionary
     score = request.get_json()
@@ -159,7 +159,6 @@ def limit():
     return jsonify(results), 200
 
 # JONNA (Poistetaan toinen, jos ei tarvita)
-@app.route('/scores', methods=['POST'])
 def add_score_to_database(score):
     """
     Add a new score to the database.

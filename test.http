@@ -12,8 +12,7 @@ delete https://scores-shxw.onrender.com/scores/4
 
 post https://scores-shxw.onrender.com/scores
 content-type: application/json
-
-{ "name": "Jonna", "points": 4 }
+{ "name": "Jna", "points": 4 }
 
 ###
 
