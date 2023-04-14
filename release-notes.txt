@@ -12,3 +12,5 @@ RELEASE 2
 - Limit & sort work together
 - HTML added
 
+RELEASE 3
+- Validation for username

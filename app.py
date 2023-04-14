@@ -40,6 +40,16 @@ def get_scores():
 # JONNA "Fetching score based on id": 
 @app.route('/scores/<int:the_id>')
 def get_scores_id(the_id):
+    """
+    Returns the score object with the given id as a JSON response.
+
+    Args:
+    - the_id: integer value representing the id of the desired score object
+
+    Returns:
+    - A JSON response containing the score object with the given id and an HTTP status code of 200 (OK) if a matching score object is found.
+    - An empty response and an HTTP status code of 404 (Not Found) if no matching score object is found.
+    """
     scores = read_scores()
     for score in scores:
         if score["id"] == the_id:
@@ -48,7 +58,7 @@ def get_scores_id(the_id):
 
 
 # JONNA "Adding a new score"
-@app.route('/scores', methods=['POST'])
+
 def add_score():
     # load given JSON data and turn it into dictionary
     score = request.get_json()
@@ -71,6 +81,20 @@ def add_score():
 # JONNA "Deleting a score by id":
 @app.route('/scores/<int:the_id>', methods=['DELETE'])
 def delete_customer(the_id):
+    """
+    Deletes the score object with the given id.
+
+    Args:
+    - the_id (int): the id of the score object to be deleted.
+
+    Returns:
+    - A tuple containing an empty response and an HTTP status code of 204 (No Content) if a matching score object is found and deleted.
+    - A tuple containing an empty response and an HTTP status code of 404 (Not Found) if no matching score object is found.
+
+    Raises:
+    - ValueError: if the_id parameter is not an integer.
+
+    """
     scores = read_scores()
     index_to_be_deleted = -1
 
@@ -80,7 +104,6 @@ def delete_customer(the_id):
     
     if(index_to_be_deleted != -1):
         scores.pop(index_to_be_deleted)
-        # tallennetaan
         save_to_scores(scores)
         return make_response("", 204)
     else:
@@ -136,6 +159,7 @@ def limit():
     return jsonify(results), 200
 
 # JONNA (Poistetaan toinen, jos ei tarvita)
+@app.route('/scores', methods=['POST'])
 def add_score_to_database(score):
     """
     Add a new score to the database.
