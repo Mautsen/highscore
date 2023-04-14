@@ -18,6 +18,16 @@ def after_request(response):
 # JONNA & MATIAS "Fetching all scores":
 @app.route("/scores")
 def get_scores():
+    """
+    Returns a list of score objects in JSON format, sorted and limited based on the given query parameters.
+
+    Query Parameters:
+    - sort: string value indicating how to sort the scores list. Possible values are "asc" (for ascending order) and "desc" (for descending order).
+    - limit: integer value indicating the maximum number of scores to return.
+
+    Returns:
+    - A JSON response containing a list of score objects in the specified order and limit, with an HTTP status code of 200 (OK).
+    """
     scores=read_scores()
     # Copy the scores list to avoid modifying the original list.
     sorted_scores = scores
@@ -57,9 +67,19 @@ def get_scores_id(the_id):
     return make_response ("", 404)
 
 
-# JONNA "Adding a new score"
+# JONNA "Adding a new score" (Tätä käytetään backendissä)
 @app.route('/scores', methods=['POST'])
 def add_score():
+    """
+    Adds a new score to the list of scores and generates ID.
+
+    Args:
+        None
+
+    Returns:
+        - A response with an HTTP status code of 201 (Created) if the score is added successfully.
+        - A response with an HTTP status code of 400 (Bad Request) if the JSON data is invalid.
+    """
     # load given JSON data and turn it into dictionary
     score = request.get_json()
     if not score:
@@ -158,7 +178,8 @@ def limit():
 
     return jsonify(results), 200
 
-# JONNA (Poistetaan toinen, jos ei tarvita)
+# JONNA add new score (Tätä käytetään frontissa)
+@app.route('/scores', methods=['POST'])
 def add_score_to_database(score):
     """
     Add a new score to the database.
