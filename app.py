@@ -67,36 +67,36 @@ def get_scores_id(the_id):
     return make_response ("", 404)
 
 
-# JONNA "Adding a new score" 
-# @app.route('/scores', methods=['POST'])
-def add_score():
-    """
-    Adds a new score to the list of scores and generates ID.
+# # JONNA "Adding a new score" 
+# # @app.route('/scores', methods=['POST'])
+# def add_score():
+#     """
+#     Adds a new score to the list of scores and generates ID.
 
-    Args:
-        None
+#     Args:
+#         None
 
-    Returns:
-        - A response with an HTTP status code of 201 (Created) if the score is added successfully.
-        - A response with an HTTP status code of 400 (Bad Request) if the JSON data is invalid.
-    """
-    # load given JSON data and turn it into dictionary
-    score = request.get_json()
-    if not score:
-        return make_response("Invalid JSON data", 400)
-    scores = read_scores()
-    # generate new score ID
-    if scores:
-        score_id = scores[-1]['id'] + 1
-    else:
-        score_id = 1
-    # add new score with generated ID
-    score['id'] = score_id
-    scores.append(score)
-    # save updated scores
-    save_to_scores(scores)
-    # return success response
-    return make_response("", 201)
+#     Returns:
+#         - A response with an HTTP status code of 201 (Created) if the score is added successfully.
+#         - A response with an HTTP status code of 400 (Bad Request) if the JSON data is invalid.
+#     """
+#     # load given JSON data and turn it into dictionary
+#     score = request.get_json()
+#     if not score:
+#         return make_response("Invalid JSON data", 400)
+#     scores = read_scores()
+#     # generate new score ID
+#     if scores:
+#         score_id = scores[-1]['id'] + 1
+#     else:
+#         score_id = 1
+#     # add new score with generated ID
+#     score['id'] = score_id
+#     scores.append(score)
+#     # save updated scores
+#     save_to_scores(scores)
+#     # return success response
+#     return make_response("", 201)
 
 # JONNA "Deleting a score by id":
 @app.route('/scores/<int:the_id>', methods=['DELETE'])
@@ -116,18 +116,29 @@ def delete_customer(the_id):
 
     """
     scores = read_scores()
+    # Reads the scores from the database
+
     index_to_be_deleted = -1
+    # Initializes the index of the score object to be deleted to -1
 
     for i in range(0, len(scores)):
         if(scores[i]["id"] == the_id):
             index_to_be_deleted = i
+    # Loops through the scores list to find the index of the score object with the given id.       
     
     if(index_to_be_deleted != -1):
         scores.pop(index_to_be_deleted)
+          # Removes the score object at the identified index from the scores list.
+
         save_to_scores(scores)
+         # Saves the updated scores to the database.
+
         return make_response("", 204)
+        # Returns a response with status code 204 (No Content) to indicate that the score object was successfully deleted.
+
     else:
         return make_response("", 404)
+        # Returns a response with status code 404 (Not Found) to indicate that no matching score object was found.
 
 # MATIAS sort scores in asc or desc order
 @app.route('/scores', methods=['GET'])
@@ -219,16 +230,22 @@ def index():
         name = request.form.get('name')
         points = request.form.get('points')
         score = {'name': name, 'points': points}
-        # ASk user to enter a valid name if the name is not valid 
+        # Get the values of 'name' and 'points' from the form data and create a dictionary 'score' containing these values.
+         
         if not validate_username(name):
             return render_template('scores.html', error='Username may contain three letters or numbers without special characters.')
+        # If the name is not valid (according to the 'validate_username' function), return 'scores.html' template with an error message.
+
         score = {'name': name, 'points': points}
-        # If the name is valid add score to the database
+        # Create a new dictionary 'score' containing the name and points values.
+       
         if add_score_to_database(score):
             scores = read_scores()
             return render_template('scores.html', scores=scores)
         else:
             return "Failed to save score", 500
+        # If the score was added to the database successfully, read the updated scores from the database
+        # and render the 'scores.html' template with the updated scores. Otherwise, return an error message.
     else:
         scores = read_scores()
         for score in scores:
@@ -236,6 +253,7 @@ def index():
             score['name'] = score.pop('name')
             score['points'] = score.pop('points')
         return render_template('scores.html', scores=scores)
+        # If the request method is not POST, read the scores from the database and show 'scores.html' template with the scores.
 
 if __name__ == "__main__":
     app.run()
