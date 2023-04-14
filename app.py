@@ -67,8 +67,8 @@ def get_scores_id(the_id):
     return make_response ("", 404)
 
 
-# JONNA "Adding a new score" (Tätä käytetään backendissä)
-@app.route('/scores', methods=['POST'])
+# JONNA "Adding a new score" 
+# @app.route('/scores', methods=['POST'])
 def add_score():
     """
     Adds a new score to the list of scores and generates ID.
@@ -178,7 +178,7 @@ def limit():
 
     return jsonify(results), 200
 
-# JONNA add new score (Tätä käytetään frontissa)
+# JONNA add new score
 @app.route('/scores', methods=['POST'])
 def add_score_to_database(score):
     """
