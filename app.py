@@ -24,6 +24,7 @@ def require_password(func):
             abort(401, "Authentication required")
         # If the password is correct, call the decorated function with the original arguments and return the result
         return func(*args, **kwargs)
+    wrapper.__name__ = func.__name__
     return wrapper
 
 @app.after_request
