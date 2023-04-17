@@ -67,6 +67,7 @@ def get_scores():
 
 # JONNA "Fetching score based on id": 
 @app.route('/scores/<int:the_id>')
+@require_password
 def get_scores_id(the_id):
     """
     Returns the score object with the given id as a JSON response.
