@@ -11,14 +11,14 @@ bcrypt = Bcrypt(app)
 
 #scores = [{"id": 1, "name": "jack", "points":123}, {"id": 2, "name": "hannah", "points": 4567}]
 
-# Password for authentication
-password = bcrypt.generate_password_hash("secret").decode()
+# Replace 'secret' with the hashed version of the password
+password_hash = bcrypt.generate_password_hash('secret').decode('utf-8')
 
 # Password authentication decorator
 def require_password(func):
     def wrapper(*args, **kwargs):
         pw = request.args.get("pw")
-        if not pw or not bcrypt.check_password_hash(pw, password):
+        if not pw or not bcrypt.check_password_hash(password_hash, pw):
             abort(401, "Authentication required")
         return func(*args, **kwargs)
     return wrapper
