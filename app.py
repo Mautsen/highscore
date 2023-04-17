@@ -1,13 +1,27 @@
-from flask import Flask, Response, jsonify, request, make_response, render_template
+from flask import Flask, Response, jsonify, request, make_response, render_template, abort
 import json
 from operator import itemgetter
 from repository import *
 import requests
 from validation import validate_username
+from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 
 #scores = [{"id": 1, "name": "jack", "points":123}, {"id": 2, "name": "hannah", "points": 4567}]
+
+# Password for authentication
+password = "secret"
+
+# Password authentication decorator
+def require_password(func):
+    def wrapper(*args, **kwargs):
+        pw = request.args.get("pw")
+        if not pw or not bcrypt.check_password_hash(pw, password):
+            abort(401, "Authentication required")
+        return func(*args, **kwargs)
+    return wrapper
 
 @app.after_request
 def after_request(response):
@@ -17,6 +31,7 @@ def after_request(response):
 
 # JONNA & MATIAS "Fetching all scores":
 @app.route("/scores")
+@require_password
 def get_scores():
     """
     Returns a list of score objects in JSON format, sorted and limited based on the given query parameters.
