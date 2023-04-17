@@ -12,7 +12,7 @@ bcrypt = Bcrypt(app)
 #scores = [{"id": 1, "name": "jack", "points":123}, {"id": 2, "name": "hannah", "points": 4567}]
 
 # Password for authentication
-password = "secret"
+password = bcrypt.generate_password_hash("secret").decode()
 
 # Password authentication decorator
 def require_password(func):
