@@ -17,9 +17,12 @@ password_hash = bcrypt.generate_password_hash('secret').decode('utf-8')
 # Password authentication decorator
 def require_password(func):
     def wrapper(*args, **kwargs):
+        # Get the password from the query parameters of the request
         pw = request.args.get("pw")
+        #If no password is given OR the password doesn't match, the program aborts with error message
         if not pw or not bcrypt.check_password_hash(password_hash, pw):
             abort(401, "Authentication required")
+        # If the password is correct, call the decorated function with the original arguments and return the result
         return func(*args, **kwargs)
     return wrapper
 
@@ -84,6 +87,7 @@ def get_scores_id(the_id):
 
 # # JONNA "Adding a new score" 
 @app.route('/scores', methods=['POST'])
+@require_password
 def add_score():
     """
     Adds a new score to the list of scores and generates ID.
@@ -115,6 +119,7 @@ def add_score():
 
 # JONNA "Deleting a score by id":
 @app.route('/scores/<int:the_id>', methods=['DELETE'])
+@require_password
 def delete_customer(the_id):
     """
     Deletes the score object with the given id.
@@ -157,6 +162,7 @@ def delete_customer(the_id):
 
 # MATIAS sort scores in asc or desc order
 @app.route('/scores', methods=['GET'])
+@require_password
 def sort():
     scores = read_scores() 
     # Extract the 'sort' query parameter from the URL (after "?")
@@ -177,6 +183,7 @@ def sort():
     
 #MATIAS limit how many scores are shown
 @app.route('/scores', methods=['GET'])
+@require_password
 def limit():
     scores = read_scores()
     # finds the limit from url
