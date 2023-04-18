@@ -1,5 +1,6 @@
 import re
 from typing import List
+from repository import *
 
 def validate_username(name):
     invalid_usernames: List[str] = ['admin', 'root', "anal", "anus", "arse", "ass", "ballsack", "balls", "bastard", "bitch", "biatch", "bloody",
@@ -18,3 +19,10 @@ def validate_username(name):
         return True
     else:
         return False
+    
+def is_valid_username(name):
+    if not validate_username(name):
+        return False
+    scores = read_scores()
+    usernames = [score['username'] for score in scores]
+    return name not in usernames
