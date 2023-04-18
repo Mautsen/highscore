@@ -256,7 +256,7 @@ def index():
         # Get the values of 'name' and 'points' from the form data and create a dictionary 'score' containing these values.
          
         if not validate_username(name):
-            return render_template('scores.html', error='Username may contain up to ten letters without special characters.')
+            return render_template('scores.html', error='Username may contain up to ten letters without special characters and the first letter must be capitalized')
         # If the name is not valid (according to the 'validate_username' function), return 'scores.html' template with an error message.
         if not username_in_use(name):
             return render_template('scores.html', error='Username is already in use.')

@@ -13,6 +13,7 @@ RELEASE 2
 - HTML added
 
 RELEASE 3
-- Validation for username
+- Validations for username
 - Password-function added for authentication
-- HTML Post 
+- HTML fixed to show only top ten users
+- Tests for validation function

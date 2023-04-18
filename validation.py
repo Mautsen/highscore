@@ -3,18 +3,18 @@ from typing import List
 from repository import *
 
 def validate_username(name):
-    invalid_usernames: List[str] = ['admin', 'root', "anal", "anus", "arse", "ass", "ballsack", "balls", "bastard", "bitch", "biatch", "bloody",
-                                    "blowjob", "blow", "bollock", "bollok", "boner", "boob", "bugger", "bum", "butt", "buttplug", "clitoris",
-                                    "cock", "coon", "crap", "cunt", "damn", "dick", "dildo", "dyke", "fag", "feck", "fellate", "fellatio",
-                                    "felching", "fuck", "f u c k", "fudgepacker", "fudge packer", "flange", "Goddamn", "God damn", "hell",
-                                    "homo", "jerk", "jizz", "knobend", "knob end", "labia", "lmao", "lmfao", "muff", "nigger", "nigga", "omg",
-                                    "penis", "piss", "poop", "prick", "pube","pussy", "queer", "scrotum", "sex", "shit", "s hit", "sh1t", "slut",
-                                    "smegma", "spunk", "tit", "tosser", "turd", "twat", "vagina", "wank", "whore", "wtf", "huora", "perse", "paska",
-                                    "pillu", "mulkku", "vittu", "kyrpä", "neekeri", "kusi", "perkele", "saatana", "helvetti", "lutka", "kusipää",
-                                    "wittu", "ripuli", "kakka", "seksi", "pallihiki", "palli", "pylly", "pimppi", "nekru", "sperma", "kyrpa",
-                                    "kusipaa", "tissi", "tissit", "mälli", "idiootti", "transu", "trans", "lesbo", "hintti", "vammanen",
-                                    "wammanen", "kehari"]
-    pattern = r'^(?!.*(' + '|'.join(invalid_usernames) + '))[a-zA-ZäÄöÖåÅ]{3,10}$'
+    invalid_usernames: List[str] = ['Admin', 'Root', "Anal", "Anus", "Arse", "Ass", "Aallsack", "Aalls", "Bastard", "Bitch", "Biatch", "Bloody",
+                                    "Blowjob", "Blow", "Bollock", "Bollok", "Boner", "Boob", "Bugger", "Bum", "Butt", "Buttplug", "Clitoris",
+                                    "Cock", "Coon", "Crap", "Cunt", "Damn", "Dick", "Dildo", "Dyke", "Fag", "Feck", "Fellate", "Fellatio",
+                                    "Felching", "Fuck", "Fudgepacker", "Flange", "Goddamn", "God damn", "Hell",
+                                    "Homo", "Jerk", "Jizz", "Knobend", "Labia", "Lmao", "Lmfao", "Muff", "Nigger", "Nigga", "Omg",
+                                    "Penis", "Piss", "Poop", "Prick", "Pube","Pussy", "Queer", "Scrotum", "Sex", "Shit", "Slut",
+                                    "smegma", "Spunk", "Tit", "Tosser", "Turd", "Twat", "Vagina", "Wank", "Whore", "Wtf", "Huora", "Perse", "Paska",
+                                    "Pillu", "Mulkku", "Vittu", "Kyrpä", "Neekeri", "Kusi", "Perkele", "Saatana", "Helvetti", "Lutka", "Kusipää",
+                                    "Wittu", "Ripuli", "Kakka", "Seksi", "Pallihiki", "Palli", "Pylly", "Pimppi", "Nekru", "Sperma", "Kyrpa",
+                                    "Kusipaa", "Tissi", "Tissit", "Mälli", "Idiootti", "Transu", "Trans", "Lesbo", "Hintti", "Vammanen",
+                                    "Wammanen", "Kehari", "Boobs"]
+    pattern = r'^(?!.*(' + '|'.join(invalid_usernames) + '))[A-ZÄÖÅ][a-zA-ZäÄöÖåÅ]{2,9}$'
     if re.match(pattern, name):
         return True
     else:
