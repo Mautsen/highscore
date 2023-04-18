@@ -87,7 +87,7 @@ def get_scores_id(the_id):
     return make_response ("", 404)
 
 
-# # JONNA "Adding a new score" 
+# # JONNA "Adding a new score" (Backend) 
 @app.route('/scores', methods=['POST'])
 def add_score():
     """
@@ -212,7 +212,7 @@ def limit():
 
     return jsonify(results), 200
 
-# JONNA add new score
+# JONNA add new score (Frontend)
 # @app.route('/scores', methods=['POST'])
 def add_score_to_database(score):
     """

@@ -14,5 +14,5 @@ RELEASE 2
 
 RELEASE 3
 - Validation for username
-- pdocs
 - Password-function added for authentication
+- HTML Post 
