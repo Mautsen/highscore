@@ -3,7 +3,7 @@ import json
 from operator import itemgetter
 from repository import *
 import requests
-from validation import validate_username
+from validation import *
 from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
@@ -255,7 +255,7 @@ def index():
         score = {'name': name, 'points': points}
         # Get the values of 'name' and 'points' from the form data and create a dictionary 'score' containing these values.
          
-        if not validate_username(name):
+        if not is_valid_username(name):
             return render_template('scores.html', error='Username may contain ten letters without special characters.')
         # If the name is not valid (according to the 'validate_username' function), return 'scores.html' template with an error message.
 
