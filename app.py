@@ -256,25 +256,28 @@ def index():
         # Get the values of 'name' and 'points' from the form data and create a dictionary 'score' containing these values.
          
         if not validate_username(name):
-            return render_template('scores.html', error='Username may contain three letters or numbers without special characters.')
+            return render_template('scores.html', error='Username may contain ten letters without special characters.')
         # If the name is not valid (according to the 'validate_username' function), return 'scores.html' template with an error message.
 
         score = {'name': name, 'points': points}
         # Create a new dictionary 'score' containing the name and points values.
        
         if add_score_to_database(score):
+
             scores = read_scores()
-            return render_template('scores.html', scores=scores)
+            sorted_scores = sorted(scores, key=lambda x: int(x['points']), reverse=True)[:10]
+            return render_template('scores.html', scores=sorted_scores)
         else:
             return "Failed to save score", 500
         # If the score was added to the database successfully, read the updated scores from the database
         # and render the 'scores.html' template with the updated scores. Otherwise, return an error message.
     else:
         scores = read_scores()
-        for score in scores:
-            score['id'] = score.pop('id')
-            score['name'] = score.pop('name')
-            score['points'] = score.pop('points')
+        # for score in scores:
+        #     score['id'] = score.pop('id')
+        #     score['name'] = score.pop('name')
+        #     score['points'] = score.pop('points')
+        scores = sorted(scores, key=lambda k: int(k['points']), reverse=True)[:10]
         return render_template('scores.html', scores=scores)
         # If the request method is not POST, read the scores from the database and show 'scores.html' template with the scores.
 

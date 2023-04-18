@@ -10,7 +10,9 @@ def validate_username(name):
                                     "penis", "piss", "poop", "prick", "pube","pussy", "queer", "scrotum", "sex", "shit", "s hit", "sh1t", "slut",
                                     "smegma", "spunk", "tit", "tosser", "turd", "twat", "vagina", "wank", "whore", "wtf", "huora", "perse", "paska",
                                     "pillu", "mulkku", "vittu", "kyrpä", "neekeri", "kusi", "perkele", "saatana", "helvetti", "lutka", "kusipää",
-                                    "wittu", "ripuli", "kakka", "seksi", "pallihiki", "palli", "pylly", "pimppi", "nekru", "sperma"]
+                                    "wittu", "ripuli", "kakka", "seksi", "pallihiki", "palli", "pylly", "pimppi", "nekru", "sperma", "kyrpa",
+                                    "kusipaa", "tissi", "tissit", "mälli", "idiootti", "transu", "trans", "lesbo", "hintti", "vammanen",
+                                    "wammanen", "kehari"]
     pattern = r'^(?!.*(' + '|'.join(invalid_usernames) + '))[a-zA-ZäÄöÖåÅ]{1,10}$'
     if re.match(pattern, name):
         return True
