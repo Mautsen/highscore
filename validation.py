@@ -24,5 +24,7 @@ def is_valid_username(name):
     if not validate_username(name):
         return False
     scores = read_scores()
-    usernames = [score['username'] for score in scores]
-    return name not in usernames
+    for score in scores:
+        if score['username'] == name:
+            return False
+    return True
