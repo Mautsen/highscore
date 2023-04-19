@@ -24,6 +24,7 @@ def require_password(func):
             abort(401, "Authentication required")
         # If the password is correct, call the decorated function with the original arguments and return the result
         return func(*args, **kwargs)
+    # Set the name of the wrapper function to be the same as the name of the endpoint function
     wrapper.__name__ = func.__name__
     return wrapper
 
@@ -86,6 +87,13 @@ def get_scores_id(the_id):
             return jsonify(score), 200
     return make_response ("", 404)
 
+# MATIAS Created a function for getting the 10th score so that in the game the app will compare the players points to the 10th score.
+@app.route('/scores/last_score')
+def get_last_score():
+    scores = read_scores()
+    scores=sorted(scores, key=lambda k: int(k['points']), reverse=True)
+    last_score=scores[9]
+    return jsonify(last_score), 200
 
 # # JONNA "Adding a new score" (Backend) 
 @app.route('/scores', methods=['POST'])
