@@ -5,6 +5,11 @@ from repository import *
 import requests
 from validation import *
 from flask_bcrypt import Bcrypt
+import dropbox
+import os
+
+access_token = os.getenv("sl.Bc62f2f7vJvAb9EK5zFIN8OKbM5iVt4X-1ft8OhmXQxRIanQU_uIeZsN0RdC4KEHZI2VxyJnBCrMqG1i7CkOMATCBi99FKoVFPXTZOTMGSiAe8cDKNG-SrqdegswCd4mYSdWYlk")
+dbx = dropbox.Dropbox(access_token)
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -121,6 +126,9 @@ def add_score():
     # add new score with generated ID
     score['id'] = score_id
     scores.append(score)
+    #save to dropbox
+    scores_json = json.dumps(scores)
+    dbx.files_upload(scores_json.encode("utf-8"), '/highscore.txt',  mode=dropbox.files.WriteMode("overwrite"))
     # save updated scores
     save_to_scores(scores)
     # return success response

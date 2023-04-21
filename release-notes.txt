@@ -17,3 +17,7 @@ RELEASE 3
 - Password-function added for authentication
 - HTML fixed to show only top ten users
 - Tests for validation function
+
+RELEASE 4
+- HTML fixed to hide id from users
+-
