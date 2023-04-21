@@ -117,6 +117,14 @@ def add_score():
     score = request.get_json()
     if not score:
         return make_response("Invalid JSON data", 400)
+    
+        # validate username
+    username = score.get('name')
+    if not validate_username(username):
+        return make_response("Invalid username", 400)
+    if not username_in_use(username):
+        return make_response("Username already in use", 400)
+    
     scores = read_scores()
     # generate new score ID
     if scores:
@@ -128,7 +136,7 @@ def add_score():
     scores.append(score)
     #save to dropbox
     scores_json = json.dumps(scores)
-    dbx.files_upload(scores_json.encode("utf-8"), '/highscore.txt',  mode=dropbox.files.WriteMode("overwrite"))
+    dbx.files_upload(scores_json.encode("utf-8"), '/scores.txt',  mode=dropbox.files.WriteMode("overwrite"))
     # save updated scores
     save_to_scores(scores)
     # return success response
