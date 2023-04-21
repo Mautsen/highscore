@@ -3,12 +3,12 @@ import dropbox
 import os
 
 # load Dropbox access token from environment variable
-DBX_ACCESS_TOKEN = os.environ.get('avain')
-if not DBX_ACCESS_TOKEN:
+access_token = os.getenv("avain")
+if not access_token:
     raise ValueError("Please set the 'DBX_ACCESS_TOKEN' environment variable")
 
 # create a Dropbox API client
-dbx = dropbox.Dropbox(DBX_ACCESS_TOKEN)
+dbx = dropbox.Dropbox(access_token)
 
 def read_scores():
     try:
