@@ -20,4 +20,6 @@ RELEASE 3
 
 RELEASE 4
 - HTML fixed to hide id from users
--
+- HTML fixing
+- Added Dropbox
+
