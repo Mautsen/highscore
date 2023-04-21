@@ -1,8 +1,14 @@
 import json
 import dropbox
+import os
+
+# load Dropbox access token from environment variable
+DBX_ACCESS_TOKEN = os.environ.get('avain')
+if not DBX_ACCESS_TOKEN:
+    raise ValueError("Please set the 'DBX_ACCESS_TOKEN' environment variable")
 
 # create a Dropbox API client
-dbx = dropbox.Dropbox("avain")
+dbx = dropbox.Dropbox(DBX_ACCESS_TOKEN)
 
 def read_scores():
     try:
@@ -10,17 +16,31 @@ def read_scores():
         _, file = dbx.files_download('/scores.txt')
         file_contents = file.content.decode('utf-8')
         if file_contents.strip() == '':
-            # tiedosto on tyhjä, palautetaan tyhjä lista
+            # file is empty, return empty list
             return []
         else:
             scores = json.loads(file_contents)
             if isinstance(scores, dict):
-                # jos json-tiedosto sisältää yhden nimen, muutetaan se listaksi
+                # if the JSON file contains a single score, convert it to a list
                 scores = [scores]
     except dropbox.exceptions.HttpError as e:
         print(f"Error downloading scores file: {e}")
         scores = []
     return scores
+
+def save_to_scores(scores):
+    # upload scores file to Dropbox
+    scores_json = json.dumps(scores)
+    try:
+        dbx.files_upload(scores_json.encode('utf-8'), '/scores.txt', mode=dropbox.files.WriteMode('overwrite'))
+    except dropbox.exceptions.HttpError as e:
+        print(f"Error uploading scores file: {e}")
+
+def main():
+    print(read_scores())
+
+if __name__ == "__main__":
+    main()
 
 # JONNA read_scores
 # def read_scores():
@@ -39,17 +59,6 @@ def read_scores():
 #         scores = []
 #     return scores
 
-
-#Save scores to the dropbox:
-def save_to_scores(scores):
-    # tallennetaan tiedot json-muodossa tiedostoon
-    scores_json = json.dumps(scores)
-    try:
-        # upload scores file to Dropbox
-        dbx.files_upload(scores_json.encode('utf-8'), '/scores.txt', mode=dropbox.files.WriteMode('overwrite'))
-    except dropbox.exceptions.HttpError as e:
-        print(f"Error uploading scores file: {e}")
-        
 # JONNA save_scores to the scores.txt
 # def save_to_scores(scores):
 #     # tallennetaan tiedot json-muodossa tiedostoon
