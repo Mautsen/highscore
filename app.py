@@ -14,8 +14,6 @@ dbx = dropbox.Dropbox(access_token)
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
-#scores = [{"id": 1, "name": "jack", "points":123}, {"id": 2, "name": "hannah", "points": 4567}]
-
 # Replace 'secret' with the hashed version of the password
 password_hash = bcrypt.generate_password_hash('secret').decode('utf-8')
 
