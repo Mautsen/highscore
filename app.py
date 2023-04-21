@@ -8,7 +8,7 @@ from flask_bcrypt import Bcrypt
 import dropbox
 import os
 
-access_token = os.getenv("sl.Bc4hqJOdaUXxj7ZMgyXJ0cw_a3XCDl_h7gun7w2QI8gPggmaJHsO5DLIny7a4vnIsabzpRjv7WhDiP0DuR4iyYGvqaEWZhr1ps8q4E01RvOsjwvBS6Riv_Wo6HT7AZ0tL2mq73o")
+access_token = os.getenv("avain")
 dbx = dropbox.Dropbox(access_token)
 
 app = Flask(__name__)
