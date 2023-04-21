@@ -13,7 +13,7 @@ dbx = dropbox.Dropbox(access_token)
 def read_scores():
     try:
         # download scores file from Dropbox
-        _, file = dbx.files_download('/scores.txt')
+        _, file = dbx.files_download('/WineCrafterHighScore/scores.txt')
         file_contents = file.content.decode('utf-8')
         if file_contents.strip() == '':
             # file is empty, return empty list
@@ -32,7 +32,7 @@ def save_to_scores(scores):
     # upload scores file to Dropbox
     scores_json = json.dumps(scores)
     try:
-        dbx.files_upload(scores_json.encode('utf-8'), '/scores.txt', mode=dropbox.files.WriteMode('overwrite'))
+        dbx.files_upload(scores_json.encode('utf-8'), '/WineCrafterHighScore/scores.txt', mode=dropbox.files.WriteMode('overwrite'))
     except dropbox.exceptions.HttpError as e:
         print(f"Error uploading scores file: {e}")
 
