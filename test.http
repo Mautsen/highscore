@@ -17,11 +17,11 @@ content-type: application/json
 
 ###
 
-get http://scores-shxw.onrender.com/scores?limit=2?pw=secret
+get http://scores-shxw.onrender.com/scores?limit=2
 
 ###
 
-get http://scores-shxw.onrender.com/scores?sort=asc?pw=secret
+get http://scores-shxw.onrender.com/scores?sort=asc
 
 ###
 
