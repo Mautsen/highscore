@@ -20,7 +20,7 @@ def read_scores(access_token):
         scores = []
     return scores
 
-def save_to_database(scores, access_token):
+def save_to_scores(scores, access_token):
     try:
         dbx = dropbox.Dropbox(access_token)
         scores_json = json.dumps(scores)
