@@ -134,7 +134,7 @@ def add_score():
     scores.append(score)
     #save to dropbox
     scores_json = json.dumps(scores)
-    dbx.files_upload(scores_json.encode("utf-8"), '/scores.txt',  mode=dropbox.files.WriteMode("overwrite"))
+    dbx.files_upload(scores_json.encode("utf-8"), '/scores.json',  mode=dropbox.files.WriteMode("overwrite"))
     # save updated scores
     save_to_scores(scores)
     # return success response

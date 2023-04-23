@@ -1,6 +1,6 @@
-import json
 import dropbox
 import os
+from flask import jsonify, json
 
 # load Dropbox access token from environment variable
 access_token = os.getenv("avain")
@@ -13,7 +13,7 @@ dbx = dropbox.Dropbox(access_token)
 def read_scores():
     try:
         # download scores file from Dropbox
-        _, file = dbx.files_download('/scores.txt')
+        _, file = dbx.files_download('/scores.json')
         file_contents = file.content.decode('utf-8')
         if file_contents.strip() == '':
             # file is empty, return empty list
@@ -32,7 +32,7 @@ def save_to_scores(scores):
     # upload scores file to Dropbox
     scores_json = json.dumps(scores)
     try:
-        dbx.files_upload(scores_json.encode('utf-8'), '/scores.txt', mode=dropbox.files.WriteMode('overwrite'))
+        dbx.files_upload(scores_json.encode('utf-8'), '/scores.json', mode=dropbox.files.WriteMode('overwrite'))
     except dropbox.exceptions.HttpError as e:
         print(f"Error uploading scores file: {e}")
 
@@ -42,7 +42,7 @@ def main():
 if __name__ == "__main__":
     main()
 
-# JONNA read_scores
+# # JONNA read_scores
 # def read_scores():
 #     try:
 #         with open('scores.txt', 'r') as f:
@@ -59,15 +59,15 @@ if __name__ == "__main__":
 #         scores = []
 #     return scores
 
-# JONNA save_scores to the scores.txt
+# # JONNA save_scores to the scores.txt
 # def save_to_scores(scores):
 #     # tallennetaan tiedot json-muodossa tiedostoon
 #     with open('scores.txt', 'w') as f:
 #         json.dump(scores, f)
 
 
-def main():
-    print(read_scores())
+# def main():
+#     print(read_scores())
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
