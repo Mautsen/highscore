@@ -279,11 +279,13 @@ def index():
          
         if not validate_username(name):
             scores = read_scores()
-            return render_template('scores.html', error='Username may contain up to ten letters without special characters and the first letter must be capitalized', scores=scores)
+            sorted_scores = sorted(scores, key=lambda x: int(x['points']), reverse=True)[:10]
+            return render_template('scores.html', error='Username may contain up to ten letters without special characters and the first letter must be capitalized', scores=sorted_scores)
         # If the name is not valid (according to the 'validate_username' function), return 'scores.html' template with an error message.
         if not username_in_use(name):
             scores = read_scores()
-            return render_template('scores.html', error='Username is already in use.', scores=scores)
+            sorted_scores = sorted(scores, key=lambda x: int(x['points']), reverse=True)[:10]
+            return render_template('scores.html', error='Username is already in use.', scores=sorted_scores)
 
 
         score = {'name': name, 'points': points}
