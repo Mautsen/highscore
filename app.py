@@ -75,29 +75,29 @@ def get_scores():
     - A JSON response containing a list of score objects in the specified order and limit, with an HTTP status code of 200 (OK).
     """
     
-    # blob = bucket.blob('scores.txt')
-    # scores = blob.download_as_string().decode('utf-8')
-    # data = json.loads(scores)
-    # return jsonify(data)
-    
-    scores=read_scores()
-    # Copy the scores list to avoid modifying the original list.
-    sorted_scores = scores
-    # Get the 'sort' query parameter from the request, which specifies how to sort the scores.
-    sort = request.args.get("sort")
-    # If the 'sort' parameter is set to 'asc', sort the scores list in ascending order.
-    if sort == "asc":
-        sorted_scores = sorted(sorted_scores, key=lambda s: s["points"])
-    # If the 'sort' parameter is set to 'desc', sort the scores list in descending order.
-    elif sort == "desc":
-        sorted_scores = sorted(sorted_scores, key=lambda s: s["points"], reverse=True)
-    # Get the 'limit' query parameter from the request, which specifies the maximum number of scores to return.
-    limit = request.args.get("limit")
-    # If the 'limit' parameter is set, slice the sorted scores list to return only the first 'limit' scores.
-    if limit:
-        sorted_scores = sorted_scores[:int(limit)]
-    # Return the sorted and limited scores list as a JSON response.
-    return jsonify(sorted_scores)
+    blob = bucket.blob('scores.txt')
+    scores = blob.download_as_string().decode('utf-8')
+    data = json.loads(scores)
+    return jsonify(data)
+
+    # scores=read_scores()
+    # # Copy the scores list to avoid modifying the original list.
+    # sorted_scores = scores
+    # # Get the 'sort' query parameter from the request, which specifies how to sort the scores.
+    # sort = request.args.get("sort")
+    # # If the 'sort' parameter is set to 'asc', sort the scores list in ascending order.
+    # if sort == "asc":
+    #     sorted_scores = sorted(sorted_scores, key=lambda s: s["points"])
+    # # If the 'sort' parameter is set to 'desc', sort the scores list in descending order.
+    # elif sort == "desc":
+    #     sorted_scores = sorted(sorted_scores, key=lambda s: s["points"], reverse=True)
+    # # Get the 'limit' query parameter from the request, which specifies the maximum number of scores to return.
+    # limit = request.args.get("limit")
+    # # If the 'limit' parameter is set, slice the sorted scores list to return only the first 'limit' scores.
+    # if limit:
+    #     sorted_scores = sorted_scores[:int(limit)]
+    # # Return the sorted and limited scores list as a JSON response.
+    # return jsonify(sorted_scores)
 
 # JONNA "Fetching score based on id": 
 @app.route('/scores/<int:the_id>')
@@ -169,7 +169,7 @@ def add_score():
     
     scores = request.get_json()
     scores_json = json.dumps(scores)
-    save_to_scores(scores)
+    #save_to_scores(scores)
     # Upload the updated highscores file to Firebase Storage
     blob = bucket.blob('scores.txt')
     blob.upload_from_string(scores_json, content_type='text/plain')
