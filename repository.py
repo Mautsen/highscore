@@ -68,7 +68,7 @@ def read_scores():
     # return scores
 
     try:
-        blob = bucket.blob('scores.json')
+        blob = bucket.blob('scores.txt')
         scores_json = blob.download_as_string().decode('utf-8')
         return json.loads(scores_json)
     except:
