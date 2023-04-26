@@ -5,15 +5,37 @@ from repository import *
 import requests
 from validation import *
 from flask_bcrypt import Bcrypt
-import dropbox
 import os
-from github import Github
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import storage
+import tempfile
 
 #access_token = os.getenv("avain")
 #dbx = dropbox.Dropbox(access_token)
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
+
+# luetaan firebase ympäristömuuttuja
+# tee render.comiin uusi muuttuja nimeltä firebase jonka
+# sisältö on json tiedosto jonka saat firebaselta
+json_str = os.environ.get('firebase')
+
+# tallennetaan ympäristömuuttujan sisältö väliaikaiseen tiedostoon
+with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
+    f.write(json_str)
+    temp_path = f.name
+
+# luetaan tiedostosta json filu
+cred = credentials.Certificate(temp_path)
+
+# tee render.comiin ympäristömuuttuja bucket, jonka sisältö
+# esim: mydatabase-38cf0.appspot.com
+firebase_admin.initialize_app(cred, {
+    'storageBucket': os.environ.get('bucket')
+})
+bucket = storage.bucket()
 
 # Replace 'secret' with the hashed version of the password
 password_hash = bcrypt.generate_password_hash('secret').decode('utf-8')
@@ -37,21 +59,6 @@ def after_request(response):
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, DELETE'
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
-
-@app.route("repo_update_test")
-def update_github_repo():
-    TOKEN = os.getenv("highscore")
-    REPO_PATH = "Mautsen/highscore"
-    FILE_PATH = "/scores.txt"
-
-    git = Github(TOKEN)
-    repo = git.get_repo(REPO_PATH)
-    contents = repo.get_contents(FILE_PATH)
-
-    new_content = json.dumps(read_scores())
-    repo.update_file(FILE_PATH, "Automated scores.txt update", new_content, contents.sha)
-    return make_response(str(new_content), 200)
-
 
 # JONNA & MATIAS "Fetching all scores":
 @app.route("/scores")
@@ -127,34 +134,42 @@ def add_score():
         - A response with an HTTP status code of 201 (Created) if the score is added successfully.
         - A response with an HTTP status code of 400 (Bad Request) if the JSON data is invalid.
     """
-    # load given JSON data and turn it into dictionary
-    score = request.get_json()
-    if not score:
-        return make_response("Invalid JSON data", 400)
+    # # load given JSON data and turn it into dictionary
+    # score = request.get_json()
+    # if not score:
+    #     return make_response("Invalid JSON data", 400)
     
-        # validate username
-    username = score.get('name')
-    if not validate_username(username):
-        return make_response("Invalid username", 400)
-    if not username_in_use(username):
-        return make_response("Username already in use", 400)
+    #     # validate username
+    # username = score.get('name')
+    # if not validate_username(username):
+    #     return make_response("Invalid username", 400)
+    # if not username_in_use(username):
+    #     return make_response("Username already in use", 400)
     
-    scores = read_scores()
-    # generate new score ID
-    if scores:
-        score_id = scores[-1]['id'] + 1
-    else:
-        score_id = 1
-    # add new score with generated ID
-    score['id'] = score_id
-    scores.append(score)
-    #save to dropbox
+    # scores = read_scores()
+    # # generate new score ID
+    # if scores:
+    #     score_id = scores[-1]['id'] + 1
+    # else:
+    #     score_id = 1
+    # # add new score with generated ID
+    # score['id'] = score_id
+    # scores.append(score)
+    
+    # scores_json = json.dumps(scores)
+    
+    # # save updated scores
+    # save_to_scores(scores)
+    # # return success response
+    # return make_response("", 201)
+
+
+    scores = request.get_json()
     scores_json = json.dumps(scores)
-    #dbx.files_upload(scores_json.encode("utf-8"), '/scores.json',  mode=dropbox.files.WriteMode("overwrite"))
-    # save updated scores
-    save_to_scores(scores)
-    # return success response
-    return make_response("", 201)
+    # Upload the updated highscores file to Firebase Storage
+    blob = bucket.blob('highscores.json')
+    blob.upload_from_string(scores_json, content_type='text/plain')
+    return jsonify({'message': 'Customer added successfully!'})
 
 # JONNA "Deleting a score by id":
 @app.route('/scores/<int:the_id>', methods=['DELETE'])
