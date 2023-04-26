@@ -3,6 +3,7 @@ from flask import jsonify, json
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import storage
+import tempfile
 
 # load Dropbox access token from environment variable
 # access_token = os.getenv("avain")
