@@ -165,14 +165,14 @@ def add_score():
     # save_to_scores(scores)
     # # return success response
     # return make_response("", 201)
-
+    save_to_scores(scores)
     scores = request.get_json()
     scores_json = json.dumps(scores)
     
     # Upload the updated highscores file to Firebase Storage
     blob = bucket.blob('scores.txt')
     blob.upload_from_string(scores_json, content_type='text/plain')
-    save_to_scores(scores)
+    
     return jsonify({'message': 'Customer added successfully!'})
 
 # JONNA "Deleting a score by id":
