@@ -165,7 +165,7 @@ def add_score():
     # save_to_scores(scores)
     # # return success response
     # return make_response("", 201)
-    save_to_scores(scores)
+    #save_to_scores(scores)
     scores = request.get_json()
     scores_json = json.dumps(scores)
     
