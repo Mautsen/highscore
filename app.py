@@ -146,7 +146,7 @@ def add_score():
     if not username_in_use(username):
          return make_response("Username already in use", 400)
     
-     scores = read_scores()
+    scores = read_scores()
      # generate new score ID
     if scores:
         score_id = scores[-1]['id'] + 1
