@@ -147,7 +147,7 @@ def add_score():
     # # return success response
     # return make_response("", 201)
     
-    scores = request.get_json()
+    #scores = request.get_json()
     # scores_json = json.dumps(scores)
     save_to_scores(scores)
     # Upload the updated highscores file to Firebase Storage
