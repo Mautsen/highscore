@@ -98,10 +98,18 @@ def save_to_scores(scores):
     #     blob.upload_from_string(json.dumps(scores,f), content_type='text/plain')
 
     try:
+        # get the scores file from Firebase
         blob = bucket.blob(FILE)
-        blob.upload_from_string(json.dumps(scores), content_type='text/plain')
-    except Exception as e:
-        print(f"Error saving scores: {e}")
+        scores_json = blob.download_as_string().decode('utf-8')
+        # parse the scores file into a list
+        scores_list = json.loads(scores_json)
+    except:
+        # if the scores file doesn't exist or is empty, start with an empty list
+        scores_list = []
+    # append the new score to the list
+    scores_list.append(scores)
+    # save the updated list back to Firebase
+    blob.upload_from_string(json.dumps(scores_list), content_type='text/plain')
 
 def main():
     print(read_scores())
