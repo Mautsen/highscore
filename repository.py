@@ -78,7 +78,7 @@ def save_to_scores(scores):
         blob = bucket.blob('scores.txt')
         scores = blob.download_as_string().decode('utf-8')
         #json.dump(scores, f)
-        f.write(scores)
+        json.dumps(scores)
 
 def main():
     print(read_scores())
