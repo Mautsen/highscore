@@ -1,5 +1,8 @@
 import os
 from flask import jsonify, json
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import storage
 
 # load Dropbox access token from environment variable
 # access_token = os.getenv("avain")
@@ -27,13 +30,13 @@ from flask import jsonify, json
 #         scores = []
 #     return scores
 
-# def save_to_scores(scores):
-#     # upload scores file to Dropbox
-#     scores_json = json.dumps(scores)
-#     try:
-#         dbx.files_upload(scores_json.encode('utf-8'), '/scores.json', mode=dropbox.files.WriteMode('overwrite'))
-#     except dropbox.exceptions.HttpError as e:
-#         print(f"Error uploading scores file: {e}")
+#def save_to_scores(scores):
+##     upload scores file to Dropbox
+    #scores_json = json.dumps(scores)
+    #try:
+        #dbx.files_upload(scores_json.encode('utf-8'), '/scores.json', mode=dropbox.files.WriteMode('overwrite'))
+    #except dropbox.exceptions.HttpError as e:
+        #print(f"Error uploading scores file: {e}")
 
 # def main():
 #     print(read_scores())
@@ -62,9 +65,10 @@ def read_scores():
 def save_to_scores(scores):
     # tallennetaan tiedot json-muodossa tiedostoon
     with open('scores.txt', 'w') as f:
+        blob = bucket.blob('scores.txt')
+        scores = blob.download_as_string().decode('utf-8')
         json.dump(scores, f)
-
-
+        
 def main():
     print(read_scores())
 
