@@ -6,7 +6,7 @@ from firebase_admin import storage, firestore
 import tempfile
 
 
-bucket = storage.bucket()
+
 
 
 # load Dropbox access token from environment variable
@@ -67,12 +67,11 @@ def read_scores():
     return scores
 
 # JONNA save_scores to the scores.txt
-def save_to_scores(scores):
+def save_to_scores(scores, bucket):
 
     with open('scores.txt', 'w') as f:
         blob = bucket.blob('scores.txt')
         scores = blob.download_as_string().decode('utf-8')
-        #json.dump(scores, f)
         json.dump(scores, f)
 
 def main():
