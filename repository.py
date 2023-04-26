@@ -44,13 +44,23 @@ from firebase_admin import storage
 # if __name__ == "__main__":
 #     main()
 
-# JONNA read_scores
+
+
+json_str = os.environ.get('firebase')
+
+# tallennetaan ympäristömuuttujan sisältö väliaikaiseen tiedostoon
+with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
+    f.write(json_str)
+    temp_path = f.name
+
+# luetaan tiedostosta json filu
+cred = credentials.Certificate(temp_path)
 
 firebase_admin.initialize_app(cred, {
     'storageBucket': os.environ.get('bucket')
 })
 bucket = storage.bucket()
-
+# JONNA read_scores
 def read_scores():
     try:
         with open('scores.txt', 'r') as f:
