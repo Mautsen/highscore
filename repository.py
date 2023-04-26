@@ -45,22 +45,6 @@ import tempfile
 # if __name__ == "__main__":
 #     main()
 
-
-
-json_str = os.environ.get('firebase')
-
-# tallennetaan ympäristömuuttujan sisältö väliaikaiseen tiedostoon
-with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
-    f.write(json_str)
-    temp_path = f.name
-
-# luetaan tiedostosta json filu
-cred = credentials.Certificate(temp_path)
-
-firebase_admin.initialize_app(cred, {
-    'storageBucket': os.environ.get('bucket')
-})
-bucket = storage.bucket()
 # JONNA read_scores
 def read_scores():
     try:
@@ -82,8 +66,8 @@ def read_scores():
 def save_to_scores(scores):
     # tallennetaan tiedot json-muodossa tiedostoon
     with open('scores.txt', 'w') as f:
-        blob = bucket.blob('scores.txt')
-        scores = blob.download_as_string().decode('utf-8')
+        # blob = bucket.blob('scores.txt')
+        # scores = blob.download_as_string().decode('utf-8')
         json.dump(scores, f)
 
 def main():
