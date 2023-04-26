@@ -170,7 +170,7 @@ def add_score():
     scores_json = json.dumps(scores)
     
     # Upload the updated highscores file to Firebase Storage
-    blob = bucket.blob('highscores.json')
+    blob = bucket.blob('scores.txt')
     blob.upload_from_string(scores_json, content_type='text/plain')
     save_to_scores(scores)
     return jsonify({'message': 'Customer added successfully!'})
