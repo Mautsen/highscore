@@ -84,14 +84,11 @@ def save_to_scores(scores):
         # scores = blob.download_as_string().decode('utf-8')
         #json.dump(scores, f)
 
-        # Convert the scores to a dictionary
-    scores_dict = {'scores': scores}
-
-    # Add the scores to the database
-    try:
-        db.collection('scores').document('scores').set(scores_dict)
-    except Exception as e:
-        return(f"Error uploading scores: {e}")
+    with open('scores.txt', 'w') as f:
+        bucket = storage.bucket()
+        blob = bucket.blob('scores.txt')
+        scores = blob.download_as_string().decode('utf-8')
+        json.dump(scores, f)
 
 def main():
     print(read_scores())
