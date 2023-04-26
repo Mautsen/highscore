@@ -5,7 +5,19 @@ from firebase_admin import credentials
 from firebase_admin import storage, firestore
 import tempfile
 
+with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
+    f.write(json_str)
+    temp_path = f.name
 
+# luetaan tiedostosta json filu
+cred = credentials.Certificate(temp_path)
+
+# tee render.comiin ympäristömuuttuja bucket, jonka sisältö
+# esim: mydatabase-38cf0.appspot.com
+firebase_admin.initialize_app(cred, {
+    'storageBucket': os.environ.get('bucket')
+})
+bucket = storage.bucket()
 
 
 # load Dropbox access token from environment variable
@@ -74,7 +86,6 @@ def save_to_scores(scores):
         #json.dump(scores, f)
 
     with open('scores.txt', 'w') as f:
-        
         blob = bucket.blob('scores.txt')
         scores = blob.download_as_string().decode('utf-8')
         #json.dump(scores, f)
