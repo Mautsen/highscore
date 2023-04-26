@@ -2,8 +2,15 @@ import os
 from flask import jsonify, json
 import firebase_admin
 from firebase_admin import credentials
-from firebase_admin import storage
+from firebase_admin import storage, firestore
 import tempfile
+
+# Initialize Firebase app with your Firebase SDK configuration
+cred = credentials.Certificate("path/to/firebase-sdk-config.json")
+firebase_admin.initialize_app(cred)
+
+# Get a reference to the Firestore database
+db = firestore.client()
 
 # load Dropbox access token from environment variable
 # access_token = os.getenv("avain")
@@ -65,10 +72,19 @@ def read_scores():
 # JONNA save_scores to the scores.txt
 def save_to_scores(scores):
     # tallennetaan tiedot json-muodossa tiedostoon
-    with open('scores.txt', 'w') as f:
+    #with open('scores.txt', 'w') as f:
         # blob = bucket.blob('scores.txt')
         # scores = blob.download_as_string().decode('utf-8')
-        json.dump(scores, f)
+        #json.dump(scores, f)
+
+        # Convert the scores to a dictionary
+    scores_dict = {'scores': scores}
+
+    # Add the scores to the database
+    try:
+        db.collection('scores').document('scores').set(scores_dict)
+    except Exception as e:
+        return(f"Error uploading scores: {e}")
 
 def main():
     print(read_scores())
