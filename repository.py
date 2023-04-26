@@ -5,21 +5,7 @@ from firebase_admin import credentials
 from firebase_admin import storage, firestore
 import tempfile
 
-json_str = os.environ.get('firebase')
 
-# tallennetaan ympäristömuuttujan sisältö väliaikaiseen tiedostoon
-with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
-    f.write(json_str)
-    temp_path = f.name
-
-# luetaan tiedostosta json filu
-cred = credentials.Certificate(temp_path)
-
-# tee render.comiin ympäristömuuttuja bucket, jonka sisältö
-# esim: mydatabase-38cf0.appspot.com
-firebase_admin.initialize_app(cred, {
-    'storageBucket': os.environ.get('bucket')
-})
 bucket = storage.bucket()
 
 
@@ -82,11 +68,6 @@ def read_scores():
 
 # JONNA save_scores to the scores.txt
 def save_to_scores(scores):
-    # tallennetaan tiedot json-muodossa tiedostoon
-    #with open('scores.txt', 'w') as f:
-        # blob = bucket.blob('scores.txt')
-        # scores = blob.download_as_string().decode('utf-8')
-        #json.dump(scores, f)
 
     with open('scores.txt', 'w') as f:
         blob = bucket.blob('scores.txt')
