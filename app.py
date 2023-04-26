@@ -75,7 +75,7 @@ def get_scores():
     - A JSON response containing a list of score objects in the specified order and limit, with an HTTP status code of 200 (OK).
     """
     
-    blob = bucket.blob('highscores.json')
+    blob = bucket.blob('scores.txt')
     scores = blob.download_as_string().decode('utf-8')
     data = json.loads(scores)
     return jsonify(data)
