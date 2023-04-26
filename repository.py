@@ -4,7 +4,6 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import storage, firestore
 import tempfile
-from app import bucket
 
 # luetaan firebase ympäristömuuttuja
 # tee render.comiin uusi muuttuja nimeltä firebase jonka
