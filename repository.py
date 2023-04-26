@@ -99,9 +99,7 @@ def save_to_scores(scores):
 
     try:
         blob = bucket.blob(FILE)
-        current_scores = read_scores()
-        current_scores.extend(scores)
-        blob.upload_from_string(json.dumps(current_scores), content_type='text/plain')
+        blob.upload_from_string(json.dumps(scores), content_type='text/plain')
     except Exception as e:
         print(f"Error saving scores: {e}")
 
