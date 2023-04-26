@@ -141,11 +141,11 @@ def add_score():
      # add new score with generated ID
     score['id'] = score_id
     scores.append(score)
-    scores = json.dumps(scores)
+    
     # save updated scores
     save_to_scores(scores)
     # return success response
-    return make_response("", 201)
+    return jsonify(scores)
     
     #scores = request.get_json()
     # scores_json = json.dumps(scores)
