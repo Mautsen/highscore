@@ -141,7 +141,7 @@ def add_score():
      # add new score with generated ID
     score['id'] = score_id
     scores.append(score)
-    
+    scores = json.dumps(scores)
     # save updated scores
     save_to_scores(scores)
     # return success response
