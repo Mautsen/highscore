@@ -5,9 +5,11 @@ from firebase_admin import credentials
 from firebase_admin import storage, firestore
 import tempfile
 
-scores = os.environ.get('firebase')
+json_str = os.environ.get('firebase')
+
+# tallennetaan ympäristömuuttujan sisältö väliaikaiseen tiedostoon
 with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
-    f.write(scores)
+    f.write(json_str)
     temp_path = f.name
 
 # luetaan tiedostosta json filu
@@ -15,7 +17,9 @@ cred = credentials.Certificate(temp_path)
 
 # tee render.comiin ympäristömuuttuja bucket, jonka sisältö
 # esim: mydatabase-38cf0.appspot.com
-
+firebase_admin.initialize_app(cred, {
+    'storageBucket': os.environ.get('bucket')
+})
 bucket = storage.bucket()
 
 
