@@ -4,7 +4,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import storage, firestore
 import tempfile
-from app.py import buckets
+from app import bucket
 
 
 
