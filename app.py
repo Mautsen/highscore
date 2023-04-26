@@ -135,34 +135,31 @@ def add_score():
         - A response with an HTTP status code of 400 (Bad Request) if the JSON data is invalid.
     """
     # # load given JSON data and turn it into dictionary
-    # score = request.get_json()
-    # if not score:
-    #     return make_response("Invalid JSON data", 400)
+    score = request.get_json()
+    if not score:
+         return make_response("Invalid JSON data", 400)
     
-    #     # validate username
-    # username = score.get('name')
-    # if not validate_username(username):
-    #     return make_response("Invalid username", 400)
-    # if not username_in_use(username):
-    #     return make_response("Username already in use", 400)
+         # validate username
+    username = score.get('name')
+    if not validate_username(username):
+         return make_response("Invalid username", 400)
+    if not username_in_use(username):
+         return make_response("Username already in use", 400)
     
-    # scores = read_scores()
-    # # generate new score ID
-    # if scores:
-    #     score_id = scores[-1]['id'] + 1
-    # else:
-    #     score_id = 1
-    # # add new score with generated ID
-    # score['id'] = score_id
-    # scores.append(score)
-    
-    # scores_json = json.dumps(scores)
+     scores = read_scores()
+     # generate new score ID
+    if scores:
+        score_id = scores[-1]['id'] + 1
+    else:
+        score_id = 1
+     # add new score with generated ID
+    score['id'] = score_id
+    scores.append(score)
     
     # # save updated scores
     # save_to_scores(scores)
     # # return success response
     # return make_response("", 201)
-
 
     scores = request.get_json()
     scores_json = json.dumps(scores)
