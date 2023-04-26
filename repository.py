@@ -5,6 +5,7 @@ from firebase_admin import credentials
 from firebase_admin import storage, firestore
 import tempfile
 
+bucket = storage.bucket()
 
 
 
@@ -51,24 +52,30 @@ import tempfile
 
 # JONNA read_scores
 def read_scores():
+    # try:
+    #     with open('scores.txt', 'r') as f:
+    #         file_contents = f.read()
+    #         if file_contents.strip() == '':
+    #             # tiedosto on tyhjä, palautetaan tyhjä lista
+    #             return []
+    #         else:
+    #             scores = json.loads(file_contents)
+    #             if isinstance(scores, dict):
+    #                 # jos json-tiedosto sisältää yhden nimen, muutetaan se listaksi
+    #                 scores = [scores]
+    # except FileNotFoundError:
+    #     scores = []
+    # return scores
+
     try:
-        with open('scores.txt', 'r') as f:
-            file_contents = f.read()
-            if file_contents.strip() == '':
-                # tiedosto on tyhjä, palautetaan tyhjä lista
-                return []
-            else:
-                scores = json.loads(file_contents)
-                if isinstance(scores, dict):
-                    # jos json-tiedosto sisältää yhden nimen, muutetaan se listaksi
-                    scores = [scores]
-    except FileNotFoundError:
-        scores = []
-    return scores
+        blob = bucket.blob('scores.json')
+        scores_json = blob.download_as_string().decode('utf-8')
+        return json.loads(scores_json)
+    except:
+        return []
 
 # JONNA save_scores to the scores.txt
 def save_to_scores(scores):
-    bucket = storage.bucket()
     with open('scores.txt', 'w') as f:
         blob = bucket.blob('scores.txt')
         scores = blob.download_as_string().decode('utf-8')
