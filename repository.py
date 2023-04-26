@@ -67,8 +67,8 @@ def read_scores():
     return scores
 
 # JONNA save_scores to the scores.txt
-def save_to_scores(scores, bucket):
-
+def save_to_scores(scores):
+    bucket = storage.bucket()
     with open('scores.txt', 'w') as f:
         blob = bucket.blob('scores.txt')
         scores = blob.download_as_string().decode('utf-8')
