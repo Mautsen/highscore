@@ -74,10 +74,11 @@ def save_to_scores(scores):
         #json.dump(scores, f)
 
     with open('scores.txt', 'w') as f:
-        bucket = os.environ.get('bucket')
+        bucket = bucket = storage.bucket()
         blob = bucket.blob('scores.txt')
         scores = blob.download_as_string().decode('utf-8')
-        json.dump(scores, f)
+        #json.dump(scores, f)
+        f.write(scores)
 
 def main():
     print(read_scores())
