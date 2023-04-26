@@ -15,9 +15,7 @@ cred = credentials.Certificate(temp_path)
 
 # tee render.comiin ympäristömuuttuja bucket, jonka sisältö
 # esim: mydatabase-38cf0.appspot.com
-firebase_admin.initialize_app(cred, {
-    'storageBucket': os.environ.get('bucket')
-})
+
 bucket = storage.bucket()
 
 
