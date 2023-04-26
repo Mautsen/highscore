@@ -77,5 +77,6 @@ def save_to_scores(scores, bucket):
 def main():
     print(read_scores())
 
+
 if __name__ == "__main__":
     main()
