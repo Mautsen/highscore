@@ -5,8 +5,9 @@ from firebase_admin import credentials
 from firebase_admin import storage, firestore
 import tempfile
 
+scores = os.environ.get('firebase')
 with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
-    f.write(json_str)
+    f.write(scores)
     temp_path = f.name
 
 # luetaan tiedostosta json filu
