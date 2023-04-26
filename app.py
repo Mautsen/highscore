@@ -142,20 +142,19 @@ def add_score():
     score['id'] = score_id
     scores.append(score)
     
-    # # save updated scores
-    # save_to_scores(scores)
-    # # return success response
-    # return make_response("", 201)
+    # save updated scores
+    save_to_scores(scores)
+    # return success response
+    return make_response("", 201)
     
     #scores = request.get_json()
     # scores_json = json.dumps(scores)
-    save_to_scores(scores)
     # Upload the updated highscores file to Firebase Storage
     # blob = bucket.blob('scores.txt')
     # blob.upload_from_string(scores_json, content_type='text/plain')
     
     #return jsonify({'message': 'Customer added successfully!'})
-    return jsonify(scores)
+    #return jsonify(scores)
 
 # JONNA "Deleting a score by id":
 @app.route('/scores/<int:the_id>', methods=['DELETE'])
