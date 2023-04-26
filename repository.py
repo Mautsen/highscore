@@ -93,9 +93,17 @@ def read_scores():
 
 # JONNA save_scores to the scores.txt
 def save_to_scores(scores):
-    with open('scores.txt', 'w') as f:
+    # with open('scores.txt', 'w') as f:
+    #     blob = bucket.blob(FILE)
+    #     blob.upload_from_string(json.dumps(scores,f), content_type='text/plain')
+
+    try:
         blob = bucket.blob(FILE)
-        blob.upload_from_string(json.dumps(scores,f), content_type='text/plain')
+        current_scores = read_scores()
+        current_scores.extend(scores)
+        blob.upload_from_string(json.dumps(current_scores), content_type='text/plain')
+    except Exception as e:
+        print(f"Error saving scores: {e}")
 
 def main():
     print(read_scores())
