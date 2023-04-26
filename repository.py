@@ -25,7 +25,7 @@ firebase_admin.initialize_app(cred, {
 })
 bucket = storage.bucket()
 
-FILE = "scores.txt"
+FILE = 'scores.txt'
 
 # load Dropbox access token from environment variable
 # access_token = os.getenv("avain")
