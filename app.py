@@ -154,7 +154,8 @@ def add_score():
     # blob = bucket.blob('scores.txt')
     # blob.upload_from_string(scores_json, content_type='text/plain')
     
-    return jsonify({'message': 'Customer added successfully!'})
+    #return jsonify({'message': 'Customer added successfully!'})
+    return jsonify(scores)
 
 # JONNA "Deleting a score by id":
 @app.route('/scores/<int:the_id>', methods=['DELETE'])
