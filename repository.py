@@ -5,19 +5,8 @@ from firebase_admin import credentials
 from firebase_admin import storage, firestore
 import tempfile
 
-json_str = os.environ.get('firebase')
 
-# tallennetaan ympäristömuuttujan sisältö väliaikaiseen tiedostoon
-with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
-    f.write(json_str)
-    temp_path = f.name
 
-# Initialize Firebase app with your Firebase SDK configuration
-cred = credentials.Certificate(temp_path)
-firebase_admin.initialize_app(cred)
-
-# Get a reference to the Firestore database
-db = firestore.client()
 
 # load Dropbox access token from environment variable
 # access_token = os.getenv("avain")
