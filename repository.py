@@ -96,7 +96,7 @@ def save_to_scores(scores):
     scores=read_scores()
     with open('scores.txt', 'w') as f:
         blob = bucket.blob(FILE)
-        blob.upload_from_string(json.dump(scores), content_type='text/plain')
+        blob.upload_from_string(json.dumps(scores), content_type='text/plain')
 
 def main():
     print(read_scores())
