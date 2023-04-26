@@ -83,7 +83,7 @@ def read_scores():
     # except FileNotFoundError:
     #     scores = []
     # return scores
-    
+
     try:
         blob = bucket.blob(FILE)
         scores_json = blob.download_as_string().decode('utf-8')
@@ -95,7 +95,7 @@ def read_scores():
 def save_to_scores(scores):
     with open('scores.txt', 'w') as f:
         blob = bucket.blob(FILE)
-        blob.upload_from_string(json.dumps(scores,f), content_type='text/plain')
+        blob.upload_from_string(json.dumps(scores), content_type='text/plain')
 
 def main():
     print(read_scores())
