@@ -45,6 +45,12 @@ from firebase_admin import storage
 #     main()
 
 # JONNA read_scores
+
+firebase_admin.initialize_app(cred, {
+    'storageBucket': os.environ.get('bucket')
+})
+bucket = storage.bucket()
+
 def read_scores():
     try:
         with open('scores.txt', 'r') as f:
@@ -68,7 +74,7 @@ def save_to_scores(scores):
         blob = bucket.blob('scores.txt')
         scores = blob.download_as_string().decode('utf-8')
         json.dump(scores, f)
-        
+
 def main():
     print(read_scores())
 
