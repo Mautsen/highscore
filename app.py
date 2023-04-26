@@ -7,9 +7,10 @@ from validation import *
 from flask_bcrypt import Bcrypt
 import dropbox
 import os
+from github import Github
 
-access_token = os.getenv("avain")
-dbx = dropbox.Dropbox(access_token)
+#access_token = os.getenv("avain")
+#dbx = dropbox.Dropbox(access_token)
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -36,6 +37,21 @@ def after_request(response):
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, DELETE'
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
+
+@app.route("repo_update_test")
+def update_github_repo():
+    TOKEN = os.getenv("highscore")
+    REPO_PATH = "Mautsen/highscore"
+    FILE_PATH = "/scores.txt"
+
+    git = Github(TOKEN)
+    repo = git.get_repo(REPO_PATH)
+    contents = repo.get_contents(FILE_PATH)
+
+    new_content = json.dumps(read_scores())
+    repo.update_file(FILE_PATH, "Automated scores.txt update", new_content, contents.sha)
+    return make_response(str(new_content), 200)
+
 
 # JONNA & MATIAS "Fetching all scores":
 @app.route("/scores")
