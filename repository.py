@@ -6,8 +6,27 @@ from firebase_admin import storage, firestore
 import tempfile
 from app import bucket
 
+# luetaan firebase ympäristömuuttuja
+# tee render.comiin uusi muuttuja nimeltä firebase jonka
+# sisältö on json tiedosto jonka saat firebaselta
+json_str = os.environ.get('firebase')
 
+# tallennetaan ympäristömuuttujan sisältö väliaikaiseen tiedostoon
+with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
+    f.write(json_str)
+    temp_path = f.name
 
+# luetaan tiedostosta json filu
+cred = credentials.Certificate(temp_path)
+
+# tee render.comiin ympäristömuuttuja bucket, jonka sisältö
+# esim: mydatabase-38cf0.appspot.com
+firebase_admin.initialize_app(cred, {
+    'storageBucket': os.environ.get('bucket')
+})
+bucket = storage.bucket()
+
+FILE = "scores.txt"
 
 
 
@@ -69,7 +88,7 @@ def read_scores():
     # return scores
 
     try:
-        blob = bucket.blob('scores.txt')
+        blob = bucket.blob(FILE)
         scores_json = blob.download_as_string().decode('utf-8')
         return json.loads(scores_json)
     except:
@@ -77,10 +96,10 @@ def read_scores():
 
 # JONNA save_scores to the scores.txt
 def save_to_scores(scores):
+    scores=read_scores()
     with open('scores.txt', 'w') as f:
-        blob = bucket.blob('scores.txt')
-        scores = blob.download_as_string().decode('utf-8')
-        json.dump(scores, f)
+        blob = bucket.blob(FILE)
+        blob.upload_from_string(json.dumps(scores), content_type='text/plain')
 
 def main():
     print(read_scores())
