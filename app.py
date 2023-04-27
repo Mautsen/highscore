@@ -19,6 +19,21 @@ password_hash = bcrypt.generate_password_hash('secret').decode('utf-8')
 
 # Password authentication decorator
 def require_password(func):
+    """
+    Decorator function for password authentication.
+
+    This function takes in a function as a parameter and returns a new function that wraps the original function with password authentication. If the correct password is not provided, an HTTPException with a 401 status code and an "Authentication required" message will be raised.
+
+    Parameters:
+    func (function): The function to be decorated with password authentication.
+
+    Returns:
+    function: A new function that wraps the original function with password authentication.
+
+    Raises:
+    HTTPException: If no password is provided or the provided password does not match the hashed password.
+
+    """
     def wrapper(*args, **kwargs):
         # Get the password from the query parameters of the request
         pw = request.args.get("pw")
@@ -33,6 +48,21 @@ def require_password(func):
 
 @app.after_request
 def after_request(response):
+    """
+    Adds headers to the response to enable Cross-Origin Resource Sharing (CORS).
+
+    CORS is a mechanism that allows many resources (e.g., fonts, JavaScript, etc.) on a web page to be requested
+    from another domain outside the domain the resource originated from. By default, web browsers block CORS requests.
+
+    The headers added to the response enable CORS requests from any origin ('*') and allow the GET, POST, and DELETE
+    methods to be used.
+
+    Args:
+        response (Flask response object): The response to add headers to.
+
+    Returns:
+        A Flask response object with headers added to enable CORS requests.
+    """
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, DELETE'
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
@@ -42,22 +72,35 @@ def after_request(response):
 @require_password
 def get_scores():
     """
-    Returns a list of score objects in JSON format, sorted and limited based on the given query parameters.
+    Retrieve and sort a list of scores from a Cloud Storage bucket, based on the provided query parameters.
 
-    Query Parameters:
+    Args:
+    -None
+    
+    Returns:
+    - A JSON response containing a sorted and limited list of score objects, with an HTTP status code of 200 (OK).
+
+    Raises:
+    - None
+    
+    HTTP Route:
+    - GET '/scores'
+    
+    HTTP Query Parameters:
     - sort: string value indicating how to sort the scores list. Possible values are "asc" (for ascending order) and "desc" (for descending order).
     - limit: integer value indicating the maximum number of scores to return.
 
-    Returns:
-    - A JSON response containing a list of score objects in the specified order and limit, with an HTTP status code of 200 (OK).
-    """
+Example Usage:
+    To retrieve the top 10 scores in descending order:
+    GET '/scores?sort=desc&limit=10'
+"""
     
+    # Retrieve the 'scores.txt' blob from the default bucket associated with the Cloud Storage client (Firebase)
     blob = bucket.blob('scores.txt')
+    # Download the contents of the blob as a byte string, decode it as UTF-8 text, and parse it as JSON to create a list of dictionaries
     scores = blob.download_as_string().decode('utf-8')
     scores = json.loads(scores)
-    #return jsonify(data)
-
-    #scores=read_scores()
+    
     # Copy the scores list to avoid modifying the original list.
     sorted_scores = scores
     # Get the 'sort' query parameter from the request, which specifies how to sort the scores.
@@ -92,14 +135,23 @@ def get_scores_id(the_id):
     """
     scores = read_scores()
     for score in scores:
+        # Check if the 'id' of the current score matches the given 'the_id'
         if score["id"] == the_id:
+            # If a match is found, return the score object as a JSON response with an HTTP status code 
             return jsonify(score), 200
     return make_response ("", 404)
 
 # MATIAS Created a function for getting the 10th score so that in the game the app will compare the players points to the 10th score.
 @app.route('/scores/last_score')
 def get_last_score():
+    """
+    Returns the score object with the 10th 'points' value. This was made for Unity, so that it would check if the player gets to the top 10 list.
+
+    Returns:
+    - A JSON response containing the score object with the highest 'points' value, with an HTTP status code of 200 (OK).
+    """
     scores = read_scores()
+    # Sort the scores in descending order by 'points'
     scores=sorted(scores, key=lambda k: int(k['points']), reverse=True)
     last_score=scores[9]
     return jsonify(last_score), 200
@@ -216,9 +268,9 @@ def add_score_to_database(score):
 def index():
     """
     The index function that handles both GET and POST requests to the root route. When a GET request is made,
-    the function reads the data from the database and renders the index.html template with an empty form.
+    the function reads the data from the score-file and renders the index.html template with a form.
     When a POST request is made, the function reads the form data, validates the name and saves the data to the database.
-    It then reads the updated data from the database and renders the index.html template with the updated data.
+    It then reads the updated data from the score-file and renders the index.html template with the updated data.
 
     Returns:
         str: the rendered HTML template as a string.

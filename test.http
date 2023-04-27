@@ -13,7 +13,7 @@ delete https://scores-shxw.onrender.com/scores/10?pw=secret
 post https://scores-shxw.onrender.com/scores
 content-type: application/json
 
-{ "name": "Toimiiko", "points": 12345678945678 }
+{ "name": "Toimiiks", "points": 45678 }
 
 ###
 
