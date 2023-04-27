@@ -78,3 +78,47 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# # KÄYTÄ NÄITÄ KOODEJA KUN TEET PDOCSIT: (KOMMENTOI KAIKKI YLLÄOLEVA POIS SIKSI AIKAA) TAI JOS HALUAT AJAA APP.PY !!!!!!
+# import json
+
+# FILE = 'scores.txt'
+# """
+# Name of the file that stores scores data.
+# """
+
+# # JONNA read_scores
+# def read_scores():
+#     """
+#     Read scores data from the scores.txt file.
+
+#     Returns:
+#     A list of scores in JSON format.
+#     """
+#     try:
+#         with open(FILE, 'r') as f:
+#             scores_json = f.read()
+#             return json.loads(scores_json)
+#     except:
+#         return []
+
+# # JONNA save_scores to the scores.txt
+# def save_to_scores(scores):
+#     """
+#     Save scores data to the scores.txt file.
+
+#     Args:
+#     - scores: A list of scores in JSON format.
+#     """
+#     with open(FILE, 'w') as f:
+#         f.write(json.dumps(scores))
+
+
+# def main():
+#     """
+#     Print scores data.
+#     """
+#     print(read_scores())
+
+# if __name__ == "__main__":
+#     main()

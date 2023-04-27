@@ -2,5 +2,4 @@ Flask
 Gunicorn
 Requests
 flask_bcrypt
-dropbox
 firebase-admin
