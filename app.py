@@ -187,57 +187,6 @@ def delete_customer(the_id):
         return make_response("", 404)
         # Returns a response with status code 404 (Not Found) to indicate that no matching score object was found.
 
-# MATIAS sort scores in asc or desc order
-# @app.route('/scores', methods=['GET'])
-# @require_password
-# def sort():
-#     scores = read_scores() 
-#     # Extract the 'sort' query parameter from the URL (after "?")
-#     order = request.args.get('sort')
-#     # Sort the scores dictionary based on the 'points' field
-#     if order == 'desc':
-#         # If the order is desc then the reverse is True
-#         sorted_scores = sorted(scores, key=itemgetter("points"), reverse=True)
-#         # Return the sorted scores in JSON format along with a success status code
-#         return jsonify(sorted_scores), 200
-#     elif order == 'asc':
-#         sorted_scores = sorted(scores, key=itemgetter("points"), reverse=False)
-#         # Return the sorted scores in JSON format along with a success status code in ascending order
-#         return jsonify(sorted_scores), 200
-#     else:
-#         # Return an empty response with a 404 status code if the 'sort' parameter is missing or invalid
-#         return make_response("", 404)
-    
-#MATIAS limit how many scores are shown
-# @app.route('/scores', methods=['GET'])
-# @require_password
-# def limit():
-#     scores = read_scores()
-#     # finds the limit from url
-#     limit = request.args.get('limit')
-
-#     limit = int(limit)
-
-#     #If there is no limit found, return error
-#     if limit is None:
-#         return "Limit parameter missing", 400
-#     #The limit must be in integer
-#     try:
-#         limit = int(limit)
-#     except ValueError:
-#         return "Limit parameter is not a valid integer", 400
-
-#     #Initialize an empty list to hold the scores within the limit
-#     results = []
-#     for i in range(0, limit):
-#         # If i is greater than or equal to the length of scores, break the loop
-#         if i >= len(scores):
-#             break
-#         else: # Otherwise, append the ith score to the results list
-#             results.append(scores[i])
-
-#     return jsonify(results), 200
-
 # JONNA add new score (Frontend)
 # @app.route('/scores', methods=['POST'])
 def add_score_to_database(score):
