@@ -20,6 +20,9 @@ RELEASE 3
 
 RELEASE 4
 - HTML fixed to hide id from users
-- HTML fixing
-- Added Dropbox
+- HTML fixed to show top ten all the time
+- Added Dropbox (and deleted it :D)
+- Added Firebase
+- Added client
+- Pdoc
 

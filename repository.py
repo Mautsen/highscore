@@ -9,14 +9,23 @@ import tempfile
 # tee render.comiin uusi muuttuja nimeltä firebase jonka
 # sisältö on json tiedosto jonka saat firebaselta
 json_str = os.environ.get('firebase')
+"""
+A JSON string containing Firebase credentials.
+"""
 
 # tallennetaan ympäristömuuttujan sisältö väliaikaiseen tiedostoon
 with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
     f.write(json_str)
     temp_path = f.name
+"""
+A temporary file containing the Firebase credentials JSON string.
+"""
 
 # luetaan tiedostosta json filu
 cred = credentials.Certificate(temp_path)
+"""
+Firebase credentials object.
+"""
 
 # tee render.comiin ympäristömuuttuja bucket, jonka sisältö
 # esim: mydatabase-38cf0.appspot.com
@@ -24,66 +33,23 @@ firebase_admin.initialize_app(cred, {
     'storageBucket': os.environ.get('bucket')
 })
 bucket = storage.bucket()
+"""
+Firebase Storage bucket object.
+"""
 
 FILE = 'scores.txt'
-
-# load Dropbox access token from environment variable
-# access_token = os.getenv("avain")
-# if not access_token:
-#     raise ValueError("Please set the 'DBX_ACCESS_TOKEN' environment variable")
-
-# # create a Dropbox API client
-# dbx = dropbox.Dropbox(access_token)
-
-# def read_scores():
-#     try:
-#         # download scores file from Dropbox
-#         _, file = dbx.files_download('/scores.json')
-#         file_contents = file.content.decode('utf-8')
-#         if file_contents.strip() == '':
-#             # file is empty, return empty list
-#             return []
-#         else:
-#             scores = json.loads(file_contents)
-#             if isinstance(scores, dict):
-#                 # if the JSON file contains a single score, convert it to a list
-#                 scores = [scores]
-#     except dropbox.exceptions.HttpError as e:
-#         print(f"Error downloading scores file: {e}")
-#         scores = []
-#     return scores
-
-#def save_to_scores(scores):
-##     upload scores file to Dropbox
-    #scores_json = json.dumps(scores)
-    #try:
-        #dbx.files_upload(scores_json.encode('utf-8'), '/scores.json', mode=dropbox.files.WriteMode('overwrite'))
-    #except dropbox.exceptions.HttpError as e:
-        #print(f"Error uploading scores file: {e}")
-
-# def main():
-#     print(read_scores())
-
-# if __name__ == "__main__":
-#     main()
+"""
+Name of the file that stores scores data.
+"""
 
 # JONNA read_scores
 def read_scores():
-    # try:
-    #     with open('scores.txt', 'r') as f:
-    #         file_contents = f.read()
-    #         if file_contents.strip() == '':
-    #             # tiedosto on tyhjä, palautetaan tyhjä lista
-    #             return []
-    #         else:
-    #             scores = json.loads(file_contents)
-    #             if isinstance(scores, dict):
-    #                 # jos json-tiedosto sisältää yhden nimen, muutetaan se listaksi
-    #                 scores = [scores]
-    # except FileNotFoundError:
-    #     scores = []
-    # return scores
+    """
+    Read scores data from Firebase Storage.
 
+    Returns:
+    A list of scores in JSON format.
+    """
     try:
         blob = bucket.blob(FILE)
         scores_json = blob.download_as_string().decode('utf-8')
@@ -93,11 +59,21 @@ def read_scores():
 
 # JONNA save_scores to the scores.txt
 def save_to_scores(scores):
+    """
+    Save scores data to Firebase Storage.
+
+    Args:
+    - scores: A list of scores in JSON format.
+    """
     with open('scores.txt', 'w') as f:
         blob = bucket.blob(FILE)
         blob.upload_from_string(json.dumps(scores), content_type='text/plain')
 
+
 def main():
+    """
+    Print scores data.
+    """
     print(read_scores())
 
 if __name__ == "__main__":

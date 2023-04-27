@@ -13,19 +13,19 @@ delete https://scores-shxw.onrender.com/scores/10?pw=secret
 post https://scores-shxw.onrender.com/scores
 content-type: application/json
 
-{ "name": "Jna", "points": 4 }
+{ "name": "Toimiiko", "points": 12345678945678 }
 
 ###
 
-get http://scores-shxw.onrender.com/scores?limit=2
+get http://scores-shxw.onrender.com/scores?limit=2&pw=secret
 
 ###
 
-get http://scores-shxw.onrender.com/scores?sort=asc
+get http://scores-shxw.onrender.com/scores?sort=asc&pw=secret
 
 ###
 
-get http://127.0.0.1:5000/scores?sort=desc
+get http://scores-shxw.onrender.com/scores?sort=desc&pw=secret
 
 ###
 

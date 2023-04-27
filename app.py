@@ -5,14 +5,11 @@ from repository import *
 import requests
 from validation import *
 from flask_bcrypt import Bcrypt
-import os
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import storage
 import tempfile
 
-#access_token = os.getenv("avain")
-#dbx = dropbox.Dropbox(access_token)
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -141,20 +138,11 @@ def add_score():
      # add new score with generated ID
     score['id'] = score_id
     scores.append(score)
-    
     # save updated scores
     save_to_scores(scores)
     # return success response
     return jsonify(scores)
-    
-    #scores = request.get_json()
-    # scores_json = json.dumps(scores)
-    # Upload the updated highscores file to Firebase Storage
-    # blob = bucket.blob('scores.txt')
-    # blob.upload_from_string(scores_json, content_type='text/plain')
-    
-    #return jsonify({'message': 'Customer added successfully!'})
-    #return jsonify(scores)
+
 
 # JONNA "Deleting a score by id":
 @app.route('/scores/<int:the_id>', methods=['DELETE'])
