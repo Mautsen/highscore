@@ -57,7 +57,7 @@ def get_scores():
     scores = json.loads(scores)
     #return jsonify(data)
 
-    scores=read_scores()
+    #scores=read_scores()
     # Copy the scores list to avoid modifying the original list.
     sorted_scores = scores
     # Get the 'sort' query parameter from the request, which specifies how to sort the scores.
