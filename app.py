@@ -64,10 +64,10 @@ def get_scores():
     sort = request.args.get("sort")
     # If the 'sort' parameter is set to 'asc', sort the scores list in ascending order.
     if sort == "asc":
-        sorted_scores = sorted(sorted_scores, key=lambda s: s["points"])
+        sorted_scores = sorted(sorted_scores, key=lambda s: int(s["points"]))
     # If the 'sort' parameter is set to 'desc', sort the scores list in descending order.
     elif sort == "desc":
-        sorted_scores = sorted(sorted_scores, key=lambda s: s["points"], reverse=True)
+        sorted_scores = sorted(sorted_scores, key=lambda s: int(s["points"]), reverse=True)
     # Get the 'limit' query parameter from the request, which specifies the maximum number of scores to return.
     limit = request.args.get("limit")
     # If the 'limit' parameter is set, slice the sorted scores list to return only the first 'limit' scores.
