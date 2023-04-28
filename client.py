@@ -29,7 +29,7 @@ while True:
             print("Delete complete.")
         else:
             print(f"ID {the_id} not found")
-        #print(d.status_code)
+        print(d.status_code)
     elif choice == 3:
         r = requests.get('http://scores-shxw.onrender.com/scores?pw=secret')
         print(r.text)
