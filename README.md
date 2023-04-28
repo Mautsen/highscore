@@ -40,7 +40,7 @@ Matias Leppänen
 - cd highscore
 
 # start backend
-- The file app.py cannot be run at the moment because of firebase. The file client.py uses the backend functions, so you can test them with the command: python client.py 
+- The file app.py cannot be run at the moment because of firebase. The file client.py uses the backend functions, so you can test them with the command:        python client.py 
 
 # start frontend
 https://scores-shxw.onrender.com/
@@ -53,3 +53,4 @@ https://scores-shxw.onrender.com/
 The backend is secured with a hashed password
 
 # Screencast:
+[![Screencast](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=k4RMZif1Rdg)
