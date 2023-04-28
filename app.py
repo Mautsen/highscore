@@ -167,7 +167,7 @@ def add_score():
         None
 
     Returns:
-        - A response with an HTTP status code of 201 (Created) if the score is added successfully.
+        - A response with an HTTP status code of 200 (OK) if the score is added successfully.
         - A response with an HTTP status code of 400 (Bad Request) if the JSON data is invalid.
     """
     # # load given JSON data and turn it into dictionary

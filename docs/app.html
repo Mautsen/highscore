@@ -186,6 +186,7 @@ def get_last_score():
 
 # # JONNA &#34;Adding a new score&#34; (Backend) 
 @app.route(&#39;/scores&#39;, methods=[&#39;POST&#39;])
+@require_password
 def add_score():
     &#34;&#34;&#34;
     Adds a new score to the list of scores and generates ID.
@@ -194,7 +195,7 @@ def add_score():
         None
 
     Returns:
-        - A response with an HTTP status code of 201 (Created) if the score is added successfully.
+        - A response with an HTTP status code of 200 (OK) if the score is added successfully.
         - A response with an HTTP status code of 400 (Bad Request) if the JSON data is invalid.
     &#34;&#34;&#34;
     # # load given JSON data and turn it into dictionary
@@ -350,58 +351,22 @@ if __name__ == &#34;__main__&#34;:
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="app.add_score"><code class="name flex">
-<span>def <span class="ident">add_score</span></span>(<span>)</span>
+<span>def <span class="ident">add_score</span></span>(<span>*args, **kwargs)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Adds a new score to the list of scores and generates ID.</p>
-<h2 id="args">Args</h2>
-<p>None</p>
-<h2 id="returns">Returns</h2>
-<ul>
-<li>A response with an HTTP status code of 201 (Created) if the score is added successfully.</li>
-<li>A response with an HTTP status code of 400 (Bad Request) if the JSON data is invalid.</li>
-</ul></div>
+<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">@app.route(&#39;/scores&#39;, methods=[&#39;POST&#39;])
-def add_score():
-    &#34;&#34;&#34;
-    Adds a new score to the list of scores and generates ID.
-
-    Args:
-        None
-
-    Returns:
-        - A response with an HTTP status code of 201 (Created) if the score is added successfully.
-        - A response with an HTTP status code of 400 (Bad Request) if the JSON data is invalid.
-    &#34;&#34;&#34;
-    # # load given JSON data and turn it into dictionary
-    score = request.get_json()
-    if not score:
-         return make_response(&#34;Invalid JSON data&#34;, 400)
-    
-         # validate username
-    username = score.get(&#39;name&#39;)
-    if not validate_username(username):
-         return make_response(&#34;Invalid username&#34;, 400)
-    if not username_in_use(username):
-         return make_response(&#34;Username already in use&#34;, 400)
-    
-    scores = read_scores()
-     # generate new score ID
-    if scores:
-        score_id = scores[-1][&#39;id&#39;] + 1
-    else:
-        score_id = 1
-     # add new score with generated ID
-    score[&#39;id&#39;] = score_id
-    scores.append(score)
-    # save updated scores
-    save_to_scores(scores)
-    # return success response
-    return jsonify(scores)</code></pre>
+<pre><code class="python">def wrapper(*args, **kwargs):
+    # Get the password from the query parameters of the request
+    pw = request.args.get(&#34;pw&#34;)
+    #If no password is given OR the password doesn&#39;t match, the program aborts with error message
+    if not pw or not bcrypt.check_password_hash(password_hash, pw):
+        abort(401, &#34;Authentication required&#34;)
+    # If the password is correct, call the decorated function with the original arguments and return the result
+    return func(*args, **kwargs)</code></pre>
 </details>
 </dd>
 <dt id="app.add_score_to_database"><code class="name flex">
