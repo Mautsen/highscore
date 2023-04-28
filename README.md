@@ -1,5 +1,5 @@
 # Highscore
-Highscore for mobilegame. In the website you can see top ten users and add new user with points.
+Highscore for mobilegame. In the website you can see top ten users and add a new user with points.
 In the backend you can:
 - Fetch all scores
 - Fetch score based on id
@@ -19,7 +19,9 @@ Matias Leppänen
 
 # Tech/framework used
 
-Python, HTML, CSS
+- Python
+- HTML
+- CSS
 
 # External modules:
 
@@ -30,14 +32,15 @@ Python, HTML, CSS
 - `Gunicorn`: Python HTTP server
 
 # Installation and running:
-See the requirements.txt file or above which external modules are necessary to install before running the code and install them. Command: pip install "module-name-here"
+- See the requirements.txt file or above which external modules are necessary to install before running the code and install them.
+- Command: pip install "module-name-here"
 
 # clone highscore repository
-git clone "copy-the-repository-link-here" (More instructions from here: https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-cd highscore
+- git clone "copy-the-repository-link-here" (More instructions from here: https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
+- cd highscore
 
 # start backend
-The file app.py cannot be run at the moment because of firebase. The file client.py uses the backend functions, so you can test them with the command: python client.py
+- The file app.py cannot be run at the moment because of firebase. The file client.py uses the backend functions, so you can test them with the command: python client.py
 
 # start frontend
 https://scores-shxw.onrender.com/
