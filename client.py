@@ -10,7 +10,7 @@ while True:
 
     choice = int(input())
 
-    url = 'http://scores-shxw.onrender.com/scores'
+    url = 'http://scores-shxw.onrender.com/scores?pw=secret'
 
     if choice == 1:
         username = input("Enter the username: ")
@@ -21,7 +21,7 @@ while True:
             print("Customer added succesfully")
         else:
             print("Your username is already in use or it is invalid, please choose another.")
-        #print(x.status_code)
+        print(x.status_code)
     elif choice == 2:
         the_id=input("Give the customer id you want to delete:\n")
         d = requests.delete(f"http://scores-shxw.onrender.com/scores/{the_id}?pw=secret")
