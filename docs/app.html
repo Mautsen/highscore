@@ -63,6 +63,21 @@ def require_password(func):
 
     &#34;&#34;&#34;
     def wrapper(*args, **kwargs):
+        &#34;&#34;&#34;&#34;
+        A decorator function that wraps another function to provide authentication functionality. 
+
+        Parameters
+        ----------
+        *args : tuple
+            positional arguments that will be passed to the decorated function
+        **kwargs : dict
+            keyword arguments that will be passed to the decorated function
+
+        Returns
+        -------
+        result : Any
+        The result of the decorated function if the authentication is successful
+        &#34;&#34;&#34;
         # Get the password from the query parameters of the request
         pw = request.args.get(&#34;pw&#34;)
         #If no password is given OR the password doesn&#39;t match, the program aborts with error message
@@ -354,12 +369,42 @@ if __name__ == &#34;__main__&#34;:
 <span>def <span class="ident">add_score</span></span>(<span>*args, **kwargs)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>"
+A decorator function that wraps another function to provide authentication functionality. </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>*args</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>positional arguments that will be passed to the decorated function</dd>
+<dt><strong><code>**kwargs</code></strong> :&ensp;<code>dict</code></dt>
+<dd>keyword arguments that will be passed to the decorated function</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>result</code></strong> :&ensp;<code>Any</code></dt>
+<dd>&nbsp;</dd>
+<dt><code>The result</code> of <code>the decorated function if the authentication is successful</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def wrapper(*args, **kwargs):
+    &#34;&#34;&#34;&#34;
+    A decorator function that wraps another function to provide authentication functionality. 
+
+    Parameters
+    ----------
+    *args : tuple
+        positional arguments that will be passed to the decorated function
+    **kwargs : dict
+        keyword arguments that will be passed to the decorated function
+
+    Returns
+    -------
+    result : Any
+    The result of the decorated function if the authentication is successful
+    &#34;&#34;&#34;
     # Get the password from the query parameters of the request
     pw = request.args.get(&#34;pw&#34;)
     #If no password is given OR the password doesn&#39;t match, the program aborts with error message
@@ -458,12 +503,42 @@ def after_request(response):
 <span>def <span class="ident">delete_customer</span></span>(<span>*args, **kwargs)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>"
+A decorator function that wraps another function to provide authentication functionality. </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>*args</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>positional arguments that will be passed to the decorated function</dd>
+<dt><strong><code>**kwargs</code></strong> :&ensp;<code>dict</code></dt>
+<dd>keyword arguments that will be passed to the decorated function</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>result</code></strong> :&ensp;<code>Any</code></dt>
+<dd>&nbsp;</dd>
+<dt><code>The result</code> of <code>the decorated function if the authentication is successful</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def wrapper(*args, **kwargs):
+    &#34;&#34;&#34;&#34;
+    A decorator function that wraps another function to provide authentication functionality. 
+
+    Parameters
+    ----------
+    *args : tuple
+        positional arguments that will be passed to the decorated function
+    **kwargs : dict
+        keyword arguments that will be passed to the decorated function
+
+    Returns
+    -------
+    result : Any
+    The result of the decorated function if the authentication is successful
+    &#34;&#34;&#34;
     # Get the password from the query parameters of the request
     pw = request.args.get(&#34;pw&#34;)
     #If no password is given OR the password doesn&#39;t match, the program aborts with error message
@@ -503,12 +578,42 @@ def get_last_score():
 <span>def <span class="ident">get_scores</span></span>(<span>*args, **kwargs)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>"
+A decorator function that wraps another function to provide authentication functionality. </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>*args</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>positional arguments that will be passed to the decorated function</dd>
+<dt><strong><code>**kwargs</code></strong> :&ensp;<code>dict</code></dt>
+<dd>keyword arguments that will be passed to the decorated function</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>result</code></strong> :&ensp;<code>Any</code></dt>
+<dd>&nbsp;</dd>
+<dt><code>The result</code> of <code>the decorated function if the authentication is successful</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def wrapper(*args, **kwargs):
+    &#34;&#34;&#34;&#34;
+    A decorator function that wraps another function to provide authentication functionality. 
+
+    Parameters
+    ----------
+    *args : tuple
+        positional arguments that will be passed to the decorated function
+    **kwargs : dict
+        keyword arguments that will be passed to the decorated function
+
+    Returns
+    -------
+    result : Any
+    The result of the decorated function if the authentication is successful
+    &#34;&#34;&#34;
     # Get the password from the query parameters of the request
     pw = request.args.get(&#34;pw&#34;)
     #If no password is given OR the password doesn&#39;t match, the program aborts with error message
@@ -522,12 +627,42 @@ def get_last_score():
 <span>def <span class="ident">get_scores_id</span></span>(<span>*args, **kwargs)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>"
+A decorator function that wraps another function to provide authentication functionality. </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>*args</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>positional arguments that will be passed to the decorated function</dd>
+<dt><strong><code>**kwargs</code></strong> :&ensp;<code>dict</code></dt>
+<dd>keyword arguments that will be passed to the decorated function</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>result</code></strong> :&ensp;<code>Any</code></dt>
+<dd>&nbsp;</dd>
+<dt><code>The result</code> of <code>the decorated function if the authentication is successful</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def wrapper(*args, **kwargs):
+    &#34;&#34;&#34;&#34;
+    A decorator function that wraps another function to provide authentication functionality. 
+
+    Parameters
+    ----------
+    *args : tuple
+        positional arguments that will be passed to the decorated function
+    **kwargs : dict
+        keyword arguments that will be passed to the decorated function
+
+    Returns
+    -------
+    result : Any
+    The result of the decorated function if the authentication is successful
+    &#34;&#34;&#34;
     # Get the password from the query parameters of the request
     pw = request.args.get(&#34;pw&#34;)
     #If no password is given OR the password doesn&#39;t match, the program aborts with error message
@@ -634,6 +769,21 @@ HTTPException: If no password is provided or the provided password does not matc
 
     &#34;&#34;&#34;
     def wrapper(*args, **kwargs):
+        &#34;&#34;&#34;&#34;
+        A decorator function that wraps another function to provide authentication functionality. 
+
+        Parameters
+        ----------
+        *args : tuple
+            positional arguments that will be passed to the decorated function
+        **kwargs : dict
+            keyword arguments that will be passed to the decorated function
+
+        Returns
+        -------
+        result : Any
+        The result of the decorated function if the authentication is successful
+        &#34;&#34;&#34;
         # Get the password from the query parameters of the request
         pw = request.args.get(&#34;pw&#34;)
         #If no password is given OR the password doesn&#39;t match, the program aborts with error message

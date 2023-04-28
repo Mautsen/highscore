@@ -35,6 +35,21 @@ def require_password(func):
 
     """
     def wrapper(*args, **kwargs):
+        """"
+        A decorator function that wraps another function to provide authentication functionality. 
+
+        Parameters
+        ----------
+        *args : tuple
+            positional arguments that will be passed to the decorated function
+        **kwargs : dict
+            keyword arguments that will be passed to the decorated function
+
+        Returns
+        -------
+        result : Any
+        The result of the decorated function if the authentication is successful
+        """
         # Get the password from the query parameters of the request
         pw = request.args.get("pw")
         #If no password is given OR the password doesn't match, the program aborts with error message
