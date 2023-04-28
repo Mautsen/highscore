@@ -53,4 +53,4 @@ https://scores-shxw.onrender.com/
 The backend is secured with a hashed password
 
 # Screencast:
-[![Screencast](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=k4RMZif1Rdg)
+[![Screencast](https://img.youtube.com/vi/(https://www.youtube.com/watch?v=k4RMZif1Rdg)/0.jpg)](https://www.youtube.com/watch?v=k4RMZif1Rdg)
