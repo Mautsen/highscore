@@ -33,14 +33,14 @@ Matias Leppänen
 
 # Installation and running:
 - See the requirements.txt file or above which external modules are necessary to install before running the code and install them.
-- Command: pip install "module-name-here"
+- Command for installing the external modules: pip install "module-name-here"
 
 # clone highscore repository
 - git clone "copy-the-repository-link-here" (More instructions from here: https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
 - cd highscore
 
 # start backend
-- The file app.py cannot be run at the moment because of firebase. The file client.py uses the backend functions, so you can test them with the command: python client.py
+- The file app.py cannot be run at the moment because of firebase. The file client.py uses the backend functions, so you can test them with the command: python client.py 
 
 # start frontend
 https://scores-shxw.onrender.com/
@@ -49,5 +49,7 @@ https://scores-shxw.onrender.com/
 API is deployed to cloud and can be accessed using following url:
 
 https://scores-shxw.onrender.com/
+
+The backend is secured with a hashed password
 
 # Screencast:
