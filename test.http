@@ -10,7 +10,7 @@ delete https://scores-shxw.onrender.com/scores/10?pw=secret
 
 ###
 
-post https://scores-shxw.onrender.com/scores
+post https://scores-shxw.onrender.com/scores?pw=secret
 content-type: application/json
 
 { "name": "Testing", "points": 45678 }

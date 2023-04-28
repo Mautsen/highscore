@@ -158,6 +158,7 @@ def get_last_score():
 
 # # JONNA "Adding a new score" (Backend) 
 @app.route('/scores', methods=['POST'])
+@require_password
 def add_score():
     """
     Adds a new score to the list of scores and generates ID.
