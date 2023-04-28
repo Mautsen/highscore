@@ -18,11 +18,13 @@ RELEASE 3
 - HTML fixed to show only top ten users
 - Tests for validation function
 
-RELEASE 4
+RELEASE 4 (Final release)
 - HTML fixed to hide id from users
 - HTML fixed to show top ten all the time
 - Added Dropbox (and deleted it :D)
 - Added Firebase
 - Added client
 - Pdoc
+- Screencast made
+- README updated
 
