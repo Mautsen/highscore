@@ -9,6 +9,8 @@ In the backend you can:
 - Delete a score by id
 - Display high scores in html file format in a browser
 
+The backend is secured with a hashed password.
+
 # Author
 Jonna Kyllönen, 
 Matias Leppänen
@@ -48,9 +50,7 @@ https://scores-shxw.onrender.com/
 # API implementation
 API is deployed to cloud and can be accessed using following url:
 
-https://scores-shxw.onrender.com/
-
-The backend is secured with a hashed password
+https://scores-shxw.onrender.com/scores?pw=secret
 
 # Screencast:
 [![Screencast](https://img.youtube.com/vi/k4RMZif1Rdg/0.jpg)](https://www.youtube.com/watch?v=k4RMZif1Rdg)
