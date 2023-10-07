@@ -37,14 +37,14 @@ Matias Leppänen
 - See the requirements.txt file or above which external modules are necessary to install before running the code and install them.
 - Command for installing the external modules: pip install "module-name-here"
 
-# clone highscore repository
+# Clone highscore repository
 - git clone "copy-the-repository-link-here" (More instructions from here: https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
 - cd highscore
 
-# start backend
+# Start backend
 - The file app.py cannot be run at the moment because of firebase. The file client.py uses the backend functions, so you can test them with the command:        python client.py 
 
-# start frontend
+# Start frontend
 https://scores-shxw.onrender.com/
 
 # API implementation
