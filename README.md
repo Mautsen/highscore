@@ -52,5 +52,5 @@ API is deployed to cloud and can be accessed using following url:
 
 https://scores-shxw.onrender.com/scores?pw=secret
 
-<--! # Screencast: -->
-<--! [![Screencast](https://img.youtube.com/vi/k4RMZif1Rdg/0.jpg)](https://www.youtube.com/watch?v=k4RMZif1Rdg) -->
+<!-- # Screencast: -->
+<!-- [![Screencast](https://img.youtube.com/vi/k4RMZif1Rdg/0.jpg)](https://www.youtube.com/watch?v=k4RMZif1Rdg) -->
